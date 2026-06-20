@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comp Sci High — 2025–26 Results</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root{
+    --navy:#0E2A47; --ink:#16263d; --blue:#155DA8; --blue2:#2E7DD1; --accent:#00A2B3;
+    --green:#1D9E75; --amber:#E0922F; --red:#C0492A;
+    --bg:#F4F6F8; --card:#FFFFFF; --line:#E5E8EC; --muted:#697384; --muted2:#9aa3b0;
+    --fall:#2E7DD1; --spring:#1D9E75;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  a{color:var(--blue);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 1.4rem 4rem;}
+
+  /* masthead */
+  .masthead{background:linear-gradient(115deg,var(--navy) 0%,#123963 60%,#0d4f73 100%);color:#fff;padding:1.5rem 0 1.4rem;margin-bottom:0;}
+  .mast-inner{max-width:1060px;margin:0 auto;padding:0 1.4rem;display:flex;align-items:center;gap:16px;}
+  .mast-logo{width:46px;height:46px;border-radius:10px;background:#fff;padding:5px;flex:0 0 auto;object-fit:contain;}
+  .mast-mono{width:46px;height:46px;border-radius:10px;background:#fff;color:var(--navy);display:none;align-items:center;justify-content:center;font-weight:800;font-size:12px;letter-spacing:.5px;flex:0 0 auto;}
+  .mast-txt h1{font-size:20px;font-weight:700;letter-spacing:-0.3px;}
+  .mast-txt p{font-size:12.5px;color:#bcd3ea;margin-top:2px;}
+  .mast-badges{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap;}
+  .mb{font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.13);color:#dcebff;}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:1060px;margin:0 auto;padding:0 1.4rem;display:flex;gap:2px;flex-wrap:wrap;}
+  .nav button{padding:13px 16px;font-size:13.5px;font-weight:600;border:none;background:none;color:var(--muted);cursor:pointer;border-bottom:2.5px solid transparent;margin-bottom:-1px;transition:.15s;}
+  .nav button:hover{color:var(--ink);}
+  .nav button.active{color:var(--blue);border-bottom-color:var(--blue);}
+
+  .tab{display:none;padding-top:1.6rem;}
+  .tab.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  .eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted2);margin-bottom:6px;}
+  h2.sec{font-size:19px;font-weight:700;color:var(--navy);margin-bottom:3px;letter-spacing:-.2px;}
+  .sec-sub{font-size:13px;color:var(--muted);margin-bottom:18px;}
+  h3.blk{font-size:15px;font-weight:700;color:var(--ink);margin:26px 0 12px;}
+
+  /* cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(184px,1fr));gap:13px;margin-bottom:6px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px;position:relative;overflow:hidden;}
+  .card .lab{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px;}
+  .card .val{font-size:30px;font-weight:750;color:var(--navy);line-height:1;letter-spacing:-.5px;}
+  .card .val small{font-size:14px;color:var(--muted2);font-weight:500;}
+  .card .sub{font-size:12px;margin-top:7px;color:var(--muted);}
+  .card.bl{border-left:3px solid var(--blue);}
+  .card.gr{border-left:3px solid var(--green);}
+  .card.am{border-left:3px solid var(--amber);}
+  .card.rd{border-left:3px solid var(--red);}
+  .up{color:var(--green);font-weight:600;} .down{color:var(--red);font-weight:600;} .flat{color:var(--muted2);font-weight:600;}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:16px;}
+  .panel h4{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+  .panel .cap{font-size:12px;color:var(--muted);margin-bottom:14px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:820px){.grid2{grid-template-columns:1fr;}}
+
+  .chartbox{position:relative;width:100%;}
+
+  .legend{display:flex;gap:16px;margin-bottom:10px;font-size:12px;color:var(--muted);flex-wrap:wrap;}
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .sw{width:11px;height:11px;border-radius:3px;display:inline-block;}
+
+  /* sub nav (regents / survey) */
+  .subnav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;}
+  .subnav button{padding:7px 15px;font-size:13px;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:20px;cursor:pointer;transition:.15s;}
+  .subnav button:hover{color:var(--ink);border-color:#cdd3db;}
+  .subnav button.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+  .sub{display:none;} .sub.active{display:block;animation:fade .2s ease;}
+
+  /* table */
+  .tbl-wrap{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:16px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{text-align:left;padding:10px 14px;font-size:10.5px;font-weight:700;color:var(--muted2);background:#fafbfc;border-bottom:1px solid var(--line);text-transform:uppercase;letter-spacing:.4px;}
+  td{padding:9px 14px;border-bottom:1px solid #f1f3f5;color:var(--ink);}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:#fafbfc;}
+  td.num{font-variant-numeric:tabular-nums;font-weight:600;}
+  .pill{font-size:10.5px;padding:2px 8px;border-radius:20px;font-weight:700;white-space:nowrap;}
+  .pill.u{background:#e2f4ec;color:#0F6E56;} .pill.d{background:#faeae6;color:#9b3a1d;} .pill.f{background:#eef0f2;color:#7a828e;}
+
+  .callout{border-radius:10px;padding:13px 15px;font-size:13px;margin-top:16px;line-height:1.5;}
+  .callout.good{background:#e9f6f0;border:1px solid #c8ebdc;color:#0d5e49;}
+  .callout.warn{background:#fdf3e6;border:1px solid #f4ddb9;color:#8a5a14;}
+  .callout.info{background:#eef4fb;border:1px solid #d4e3f4;color:#1a4f86;}
+  .callout b{font-weight:700;}
+
+  .note{font-size:11.5px;color:var(--muted2);margin-top:10px;font-style:italic;}
+
+  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);}
+  footer .eyebrow{margin-bottom:8px;}
+  footer .refs{font-size:11.5px;color:var(--muted);line-height:1.9;}
+  footer .refs a{color:var(--muted);text-decoration:underline;text-decoration-color:#cfd5dd;}
+  footer .refs a:hover{color:var(--blue);}
+  footer .disc{font-size:10.5px;color:var(--muted2);margin-top:12px;line-height:1.6;}
+
+  @media(max-width:600px){
+    .mast-badges{display:none;}
+    .nav button{padding:11px 11px;font-size:12.5px;}
+    .card .val{font-size:26px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="mast-inner">
+    <img class="mast-logo" src="https://images.squarespace-cdn.com/content/v1/5b328976aa49a1b7b46b89c3/1530039440176-O24B7OCR4WPIAI62JZTW/CompSci.High_Circle_Logo.png" alt="Comp Sci High" onerror="this.style.display='none';document.getElementById('mono').style.display='flex';">
+    <div id="mono" class="mast-mono">CSH</div>
+    <div class="mast-txt">
+      <h1>2025–26 Results &amp; Outcomes</h1>
+      <p>Regents &middot; Course grades by department &middot; Student experience</p>
+    </div>
+    <div class="mast-badges">
+      <span class="mb">June 2026 Regents</span>
+      <span class="mb">T2 ’25–26</span>
+      <span class="mb">Internal review</span>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <div class="nav-inner">
+    <button class="active" onclick="tab('overview',this)">Overview</button>
+    <button onclick="tab('regents',this)">Regents Exams</button>
+    <button onclick="tab('grades',this)">Grades by Department</button>
+    <button onclick="tab('survey',this)">Student Experience</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ============ OVERVIEW ============ -->
+<section id="overview" class="tab active">
+  <div class="eyebrow">Snapshot</div>
+  <h2 class="sec">Where things stand, 2025–26</h2>
+  <p class="sec-sub">June 2026 Regents pass rates, course-goal attainment for Trimester 2, and the movement in student experience. Every figure is school-level and de-identified.</p>
+
+  <div class="callout info">
+    <b>How to read this site.</b> The <b>Regents</b> tab breaks down each June 2026 exam — including how results stacked up against this year's exam goals — with score distributions, results by class, and comparisons to district, state, and peer schools. <b>Grades by Department</b> tracks the instructional priority of 90% of courses meeting their grade and pass-rate goals. <b>Student Experience</b> follows the full survey arc from Fall 2024 through June 2026. Additional exams and AP results can be added as they come in.
+  </div>
+
+  <div class="eyebrow" style="margin-top:6px">June 2026 Regents — pass rate (scale score ≥ 65)</div>
+  <div class="cards">
+    <div class="card bl"><div class="lab">Algebra I</div><div class="val">65<small>%</small></div><div class="sub">99 of 152 · Jan + June cohort</div></div>
+    <div class="card gr"><div class="lab">Algebra II</div><div class="val">86<small>%</small></div><div class="sub">61 of 71 examinees</div></div>
+    <div class="card gr"><div class="lab">ELA</div><div class="val">94<small>%</small></div><div class="sub">99 of 105 examinees</div></div>
+    <div class="card gr"><div class="lab">Global History</div><div class="val">80<small>%</small></div><div class="sub">147 of 183 examinees</div></div>
+  </div>
+
+  <div class="grid2" style="margin-top:22px">
+    <div class="panel">
+      <h4>Course goals met — whole school</h4>
+      <p class="cap">Share of courses meeting both the average-grade and pass-rate goal, by trimester.</p>
+      <div class="chartbox" style="height:250px"><canvas id="ovGoals"></canvas></div>
+    </div>
+    <div class="panel">
+      <h4>Student experience — the headline</h4>
+      <p class="cap">School climate rose sharply year over year; advisory keeps climbing this year.</p>
+      <div class="cards" style="grid-template-columns:1fr 1fr;gap:11px">
+        <div class="card"><div class="lab">Climate (fav.)</div><div class="val" style="font-size:25px">76<small>%</small></div><div class="sub"><span class="up">▲ 13.2 pts</span> vs Fall ’24</div></div>
+        <div class="card"><div class="lab">Advisory /5</div><div class="val" style="font-size:25px">4.15</div><div class="sub"><span class="up">▲ 0.12</span> vs Fall ’25</div></div>
+        <div class="card"><div class="lab">Classroom /5</div><div class="val" style="font-size:25px">3.94</div><div class="sub"><span class="up">▲ 0.06</span> vs Fall ’25</div></div>
+        <div class="card"><div class="lab">Safe in building /5</div><div class="val" style="font-size:25px">4.07</div><div class="sub"><span class="down">▼ 0.35</span> vs Fall ’25</div></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ REGENTS ============ -->
+<section id="regents" class="tab">
+  <div class="eyebrow">June 2026 administration</div>
+  <h2 class="sec">Regents Exams</h2>
+  <p class="sec-sub">Select an exam. Headline pass rates use a scale score of 65+. Peer, state, and district comparisons are drawn from the State of CSH Data Review.</p>
+
+  <div class="subnav">
+    <button class="active" onclick="sub('r','goals',this)">Goal scorecard</button>
+    <button onclick="sub('r','alg1',this)">Algebra I</button>
+    <button onclick="sub('r','alg2',this)">Algebra II</button>
+    <button onclick="sub('r','ela',this)">ELA</button>
+    <button onclick="sub('r','global',this)">Global History</button>
+  </div>
+
+  <!-- GOAL SCORECARD -->
+  <div id="r-goals" class="sub active">
+    <div class="callout info" style="margin:14px 0 2px">June 2026 exam results measured against this year's per-course exam Key Results. <b>4 of 7 exam pass-rate goals were met.</b> The misses to target next year: regular and retake Algebra I, and Global History in 10th grade.</div>
+    <div class="cards" style="margin-top:14px">
+      <div class="card gr"><div class="lab">Exam goals met</div><div class="val">4<small> / 7</small></div><div class="sub">exam pass-rate KRs</div></div>
+      <div class="card gr"><div class="lab">Biggest beat</div><div class="val">+9</div><div class="sub">ELA: 94% vs 85% goal</div></div>
+      <div class="card rd"><div class="lab">Biggest gap</div><div class="val">−25</div><div class="sub">Alg I regular: 50% vs 75%</div></div>
+      <div class="card"><div class="lab">Just cleared</div><div class="val">+1</div><div class="sub">Alg II: 86% vs 85%</div></div>
+    </div>
+    <div class="panel">
+      <h4>Pass rate vs. exam goal — by course</h4>
+      <p class="cap">Goal (gray) vs. actual June 2026 pass rate. Green = met, red = missed.</p>
+      <div class="chartbox" style="height:340px"><canvas id="goalChart"></canvas></div>
+    </div>
+    <div class="tbl-wrap">
+      <table><thead><tr><th>Course</th><th>Exam goal</th><th>Actual — June ’26</th><th>Result</th></tr></thead><tbody id="goalTable"></tbody></table>
+    </div>
+    <div class="note">Exam Key Results from the 2025–26 Key Results by Course. Algebra II is shown at the overall level against the primary Honors goal (85%); the separate “Alg 2 B” exam goal (50% pass) was also met. “Algebra I — Regular” combines the three non-honors June sections.</div>
+  </div>
+
+  <!-- ALGEBRA I -->
+  <div id="r-alg1" class="sub">
+    <div class="callout warn" style="margin:14px 0 2px">Algebra I is the clearest growth area. The June sitting passed at <b>60%</b> and the full Jan+June cohort at <b>65%</b> — ahead of the district (38%) and state (56%), but well below the CSH best-ever of <b>89% (2019)</b>. Period 4 (21%) and the retake section (47%) are where the gap concentrates.</div>
+    <div class="cards" style="margin-top:14px">
+      <div class="card bl"><div class="lab">Pass rate — cohort</div><div class="val">65<small>%</small></div><div class="sub">99 of 152 · Jan + June</div></div>
+      <div class="card"><div class="lab">June ’26 sitting</div><div class="val">60<small>%</small></div><div class="sub">77 of 129 examinees</div></div>
+      <div class="card"><div class="lab">Mean scale (June)</div><div class="val">66.3</div><div class="sub">median 68</div></div>
+      <div class="card am"><div class="lab">Mastery ≥ 85 (June)</div><div class="val">6<small>%</small></div><div class="sub">8 of 129</div></div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="panel">
+        <h4>Score distribution — June 2026</h4>
+        <p class="cap">Count of students in each scale-score band. 65 = passing.</p>
+        <div class="chartbox" style="height:270px"><canvas id="a1dist"></canvas></div>
+      </div>
+      <div class="panel">
+        <h4>Pass rate by class — June 2026</h4>
+        <p class="cap">Honors clears the bar; the regular and retake sections are the focus.</p>
+        <div class="chartbox" style="height:270px"><canvas id="a1class"></canvas></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h4>CSH vs. district, state &amp; peer schools</h4>
+      <p class="cap">Algebra I pass rate. Per State of CSH Data Review (most recent reported).</p>
+      <div class="chartbox" style="height:230px"><canvas id="a1peer"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ALGEBRA II -->
+  <div id="r-alg2" class="sub">
+    <div class="callout good" style="margin:14px 0 2px">Algebra II passed at <b>86%</b> — far above the district (42%) and the state (75%). And this is the <b>largest Algebra II cohort CSH has ever tested — 71 students, up from 50 in the prior best-ever administration</b> (97%, 2024). Holding an 86% pass rate while testing more students than ever is a real signal of strength. Most students (46 of 71) land in the 75–84 band, just short of mastery.</div>
+    <div class="cards" style="margin-top:14px">
+      <div class="card gr"><div class="lab">Pass rate</div><div class="val">86<small>%</small></div><div class="sub">61 of 71 examinees</div></div>
+      <div class="card"><div class="lab">Mean scale</div><div class="val">75.3</div><div class="sub">median 77</div></div>
+      <div class="card"><div class="lab">Approaching mastery</div><div class="val">70<small>%</small></div><div class="sub">scored 75+</div></div>
+      <div class="card am"><div class="lab">Mastery ≥ 85</div><div class="val">6<small>%</small></div><div class="sub">4 of 71</div></div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="panel">
+        <h4>Score distribution — June 2026</h4>
+        <p class="cap">Count of students in each scale-score band. 65 = passing.</p>
+        <div class="chartbox" style="height:270px"><canvas id="a2dist"></canvas></div>
+      </div>
+      <div class="panel">
+        <h4>Pass rate by class</h4>
+        <p class="cap">Three sections; Period 2 trails the other two.</p>
+        <div class="chartbox" style="height:270px"><canvas id="a2class"></canvas></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h4>CSH vs. district, state &amp; peer schools</h4>
+      <p class="cap">Algebra II pass rate. Per State of CSH Data Review (most recent reported).</p>
+      <div class="chartbox" style="height:230px"><canvas id="a2peer"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ELA -->
+  <div id="r-ela" class="sub">
+    <div class="callout good" style="margin:14px 0 2px">ELA is the standout: <b>94%</b> passing and <b>63%</b> at mastery (85+), matching the CSH best-ever and topping every comparison group, including peer Bronx Center (83%) and the state (75%).</div>
+    <div class="cards" style="margin-top:14px">
+      <div class="card gr"><div class="lab">Pass rate</div><div class="val">94<small>%</small></div><div class="sub">99 of 105 examinees</div></div>
+      <div class="card gr"><div class="lab">Mastery ≥ 85</div><div class="val">63<small>%</small></div><div class="sub">66 of 105</div></div>
+      <div class="card"><div class="lab">Mean scale</div><div class="val">84.4</div><div class="sub">median 86</div></div>
+      <div class="card"><div class="lab">Top band 85–100</div><div class="val">66</div><div class="sub">students</div></div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="panel">
+        <h4>Score distribution — June 2026</h4>
+        <p class="cap">Count of students in each scale-score band. 65 = passing.</p>
+        <div class="chartbox" style="height:270px"><canvas id="eladist"></canvas></div>
+      </div>
+      <div class="panel">
+        <h4>CSH vs. district, state &amp; peer schools</h4>
+        <p class="cap">ELA pass rate. Per State of CSH Data Review (most recent reported).</p>
+        <div class="chartbox" style="height:270px"><canvas id="elapeer"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOBAL -->
+  <div id="r-global" class="sub">
+    <div class="callout info" style="margin:14px 0 2px">Global History passed at <b>80%</b> overall, driven by an <b>91%</b> rate in 11th grade. The 10th-grade cohort (74%, mean scale 70) is the lever for next year. CSH remains above district (63%) and state (76%).</div>
+    <div class="cards" style="margin-top:14px">
+      <div class="card gr"><div class="lab">Pass rate — overall</div><div class="val">80<small>%</small></div><div class="sub">183 examinees · G10 + G11</div></div>
+      <div class="card am"><div class="lab">Grade 10</div><div class="val">74<small>%</small></div><div class="sub">97 examinees · mean 70</div></div>
+      <div class="card gr"><div class="lab">Grade 11</div><div class="val">91<small>%</small></div><div class="sub">86 examinees · mean 77</div></div>
+      <div class="card"><div class="lab">Mean scale</div><div class="val">73.0</div><div class="sub">all examinees</div></div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="panel">
+        <h4>Pass rate by grade</h4>
+        <p class="cap">11th graders (mostly second-time or on-track) clear it at 91%; 10th at 74%.</p>
+        <div class="chartbox" style="height:270px"><canvas id="glclass"></canvas></div>
+      </div>
+      <div class="panel">
+        <h4>CSH vs. district, state &amp; peer schools</h4>
+        <p class="cap">Global History pass rate. Per State of CSH Data Review (most recent reported).</p>
+        <div class="chartbox" style="height:270px"><canvas id="glpeer"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GRADES ============ -->
+<section id="grades" class="tab">
+  <div class="eyebrow">Trimester 2, 2025–26</div>
+  <h2 class="sec">Course Grades by Department</h2>
+  <p class="sec-sub">The instructional priority: <b>90% of courses meeting their average-grade and pass-rate goal</b> — without lowering exam scores, as a proxy for rigor.</p>
+
+  <div class="callout good">Every department improved its pass rate this year, and <b>History (6/6)</b> and <b>Science</b> have all or nearly all courses on track. <b>Math</b> remains the priority — it went from 3 to 8 courses on track and lifted its pass rate to 88%, but still has the most ground to cover.</div>
+
+  <div class="cards">
+    <div class="card bl"><div class="lab">Courses meeting grade goal</div><div class="val">80<small>%</small></div><div class="sub"><span class="up">▲ from 55%</span> two years ago</div></div>
+    <div class="card bl"><div class="lab">Courses meeting pass goal</div><div class="val">78<small>%</small></div><div class="sub"><span class="up">▲ from 50%</span> two years ago</div></div>
+    <div class="card"><div class="lab">School avg grade (T2)</div><div class="val">77<small>%</small></div><div class="sub">across departments</div></div>
+    <div class="card"><div class="lab">School pass rate (T2)</div><div class="val">90<small>%</small></div><div class="sub">across departments</div></div>
+  </div>
+
+  <div class="panel">
+    <h4>Progress toward the 90% goal</h4>
+    <p class="cap">Share of courses meeting the grade goal and the pass-rate goal, over four trimesters.</p>
+    <div class="legend">
+      <span><span class="sw" style="background:var(--blue)"></span>Met grade goal</span>
+      <span><span class="sw" style="background:var(--accent)"></span>Met pass-rate goal</span>
+      <span style="color:var(--muted2)">— — goal line 90%</span>
+    </div>
+    <div class="chartbox" style="height:280px"><canvas id="grTrend"></canvas></div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h4>Average grade by department — T2 ’25–26</h4>
+      <p class="cap">Department average course grade, with change vs. all of last year.</p>
+      <div class="chartbox" style="height:280px"><canvas id="grDeptGrade"></canvas></div>
+    </div>
+    <div class="panel">
+      <h4>Pass rate by department — T2 ’25–26</h4>
+      <p class="cap">Department average pass rate, with change vs. all of last year.</p>
+      <div class="chartbox" style="height:280px"><canvas id="grDeptPass"></canvas></div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Department</th><th>Avg grade ’24–25</th><th>Avg grade T2 ’25–26</th><th>Pass ’24–25</th><th>Pass T2 ’25–26</th><th>Courses on track</th></tr></thead>
+      <tbody id="grTable"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ SURVEY ============ -->
+<section id="survey" class="tab">
+  <div class="eyebrow">Student Experience Survey</div>
+  <h2 class="sec">What Students Say</h2>
+  <p class="sec-sub">The full arc: a year-over-year jump in climate (Fall ’24 → Fall ’25, % favorable), then within-year detail on a 1–5 scale (Fall ’25 → Spring ’26).</p>
+
+  <div class="subnav">
+    <button class="active" onclick="sub('s','yoy',this)">Last year vs this year</button>
+    <button onclick="sub('s','year',this)">December vs June</button>
+  </div>
+
+  <!-- YEAR OVER YEAR -->
+  <div id="s-yoy" class="sub active">
+    <div class="callout good" style="margin:14px 0 2px">The story of the year is <b>belonging and energy</b>: "energy of the school" (+14.1), "feel like you belong" (+12.3), and "students show respect" (+11.9) drove a 13-point jump in climate. The watch item is academic challenge — "work is appropriately challenging" fell 4.6 points.</div>
+    <p class="note" style="margin:14px 0 4px">Last year vs this year · Fall 2024 → Fall 2025 · percent of responses favorable</p>
+    <div class="cards">
+      <div class="card gr"><div class="lab">School climate</div><div class="val">76.2<small>%</small></div><div class="sub"><span class="up">▲ 13.2</span> from 63.0</div></div>
+      <div class="card gr"><div class="lab">Advisory</div><div class="val">74.5<small>%</small></div><div class="sub"><span class="up">▲ 4.7</span> from 69.8</div></div>
+      <div class="card gr"><div class="lab">Safety</div><div class="val">72.0<small>%</small></div><div class="sub"><span class="up">▲ 4.1</span> from 67.9</div></div>
+      <div class="card am"><div class="lab">Classroom</div><div class="val">75.4<small>%</small></div><div class="sub"><span class="flat">▼ 0.2</span> from 75.6</div></div>
+    </div>
+    <div class="panel">
+      <h4>Category favorability — Fall ’24 vs Fall ’25</h4>
+      <div class="legend">
+        <span><span class="sw" style="background:var(--fall)"></span>Fall 2024</span>
+        <span><span class="sw" style="background:var(--spring)"></span>Fall 2025</span>
+      </div>
+      <div class="chartbox" style="height:280px"><canvas id="yoyCat"></canvas></div>
+    </div>
+    <div class="grid2">
+      <div class="panel">
+        <h4>▲ Biggest improvements</h4>
+        <p class="cap">Largest gains in % favorable, Fall ’24 → Fall ’25.</p>
+        <div id="yoyUp"></div>
+      </div>
+      <div class="panel">
+        <h4>▼ Areas to watch</h4>
+        <p class="cap">Items flat or declining year over year.</p>
+        <div id="yoyDown"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THIS YEAR -->
+  <div id="s-year" class="sub">
+    <div class="callout warn" style="margin:14px 0 2px">Advisory and classroom both edged up, but <b>safety and belonging softened</b> over the year — "safe in building" (−0.35) and "emotionally safe" (−0.20) are the items to watch. "Adults care about me" was the single biggest gain (+0.47).</div>
+    <p class="note" style="margin:14px 0 4px">December 2025 vs June 2026 · average on a 1–5 scale · 319 June respondents across 21 advisories</p>
+    <div class="cards">
+      <div class="card"><div class="lab">School average</div><div class="val">3.91<small>/5</small></div><div class="sub"><span class="flat">▼ 0.05</span> from 3.96</div></div>
+      <div class="card gr"><div class="lab">Advisory</div><div class="val">4.15<small>/5</small></div><div class="sub"><span class="up">▲ 0.12</span> from 4.03</div></div>
+      <div class="card gr"><div class="lab">Classroom</div><div class="val">3.94<small>/5</small></div><div class="sub"><span class="up">▲ 0.06</span> from 3.88</div></div>
+      <div class="card rd"><div class="lab">Safe in building</div><div class="val">4.07<small>/5</small></div><div class="sub"><span class="down">▼ 0.35</span> from 4.42</div></div>
+    </div>
+    <div class="panel">
+      <h4>Category averages — Fall ’25 vs Spring ’26</h4>
+      <div class="legend">
+        <span><span class="sw" style="background:var(--fall)"></span>Fall 2025</span>
+        <span><span class="sw" style="background:var(--spring)"></span>Spring 2026</span>
+      </div>
+      <div class="chartbox" style="height:300px"><canvas id="yrCat"></canvas></div>
+    </div>
+    <div class="grid2">
+      <div class="panel">
+        <h4>Biggest movers — item level</h4>
+        <p class="cap">Change in average score (1–5), fall → spring. Green up, red down.</p>
+        <div class="chartbox" style="height:520px"><canvas id="yrMovers"></canvas></div>
+      </div>
+      <div class="panel">
+        <h4>Overall average by grade</h4>
+        <p class="cap">All items combined, by grade level.</p>
+        <div class="chartbox" style="height:240px"><canvas id="yrGrade"></canvas></div>
+        <h4 style="margin-top:18px">Strongest &amp; weakest advisories — spring</h4>
+        <p class="cap">Advisory items only, ranked by spring score.</p>
+        <div id="advMini"></div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Advisory</th><th>Grade</th><th>N</th><th>Spring</th><th>Fall</th><th>Change</th></tr></thead>
+        <tbody id="advTable"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER / REFERENCES ============ -->
+<footer>
+  <div class="eyebrow">Sources &amp; references</div>
+  <div class="refs">
+    Regents (June 2026), computed from grading sheets:
+    <a href="https://docs.google.com/spreadsheets/d/18EBI9b6H5EyLm2VtOBncBxOaeoWKDZWNa6ZPHkj8zKw/edit" target="_blank">Algebra I scores</a> ·
+    <a href="https://docs.google.com/spreadsheets/d/19KUIWTfMKTDgh3ShW4HdXjETgAoldNk_hSe4FtTOqlo/edit" target="_blank">Algebra II scores</a> ·
+    <a href="https://docs.google.com/spreadsheets/d/1KlBoQTE_NEHjQnV5J5P8Ot4zuFCZ-Jrcu5LyIzSR6eI/edit" target="_blank">ELA grading sheet</a> ·
+    <a href="https://docs.google.com/spreadsheets/d/1FXA0gspe-UM3bXgWRoDluqZD5pOH0nisQlylTw0wZ3k/edit" target="_blank">Global History grading buddy</a><br>
+    Course grades:
+    <a href="https://docs.google.com/presentation/d/1s-C4GsefwwE00cePfooqlHcghjWuZkQb9wqn62EJ2I0/edit" target="_blank">Comp Sci High T2 ’25–26 Data Review (Slides)</a> ·
+    <a href="https://docs.google.com/spreadsheets/d/13MS1v3H9OWPtmN1fPXgSFIuQsCbLJe4rVYVI3cUwV0s/edit" target="_blank">2025–26 Key Results by Course</a><br>
+    Peer / state / district comparisons: State of CSH Data Review — End of Trimester One Edition (Dec 4, 2025)<br>
+    Student experience: CSH Student Experience Surveys — Fall 2024, Fall 2025, Spring 2026 (internal)
+  </div>
+  <div class="disc">Regents pass rate = scale score ≥ 65. Algebra I cohort rate combines the January and June administrations (152 students); other figures reflect the June 2026 sitting. Comparison figures for district, state, and peer schools (District 12 / South Bronx, NY State, Bronx Center for Science and Math, Dream Charter) are reproduced from the State of CSH Data Review and reflect the most recent reported year, not necessarily June 2026. All data is school-level and de-identified. Built for internal review.</div>
+</footer>
+
+</div>
+
+<script>
+/* ---------- data ---------- */
+const C = {blue:'#155DA8',blue2:'#2E7DD1',accent:'#00A2B3',green:'#1D9E75',amber:'#E0922F',red:'#C0492A',
+  navy:'#0E2A47',line:'rgba(14,42,71,.07)',mut:'#697384',fall:'#2E7DD1',spring:'#1D9E75'};
+
+Chart.defaults.font.family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif";
+Chart.defaults.font.size=11.5;
+Chart.defaults.color=C.mut;
+
+const bandLabels=['<55','55–64','65–74','75–84','85–100'];
+const DATA={
+  a1:{dist:[17,35,51,18,8], cls:{l:['P1 Reg','P2 Retake','P4 Reg','P5 Reg','P6 Honors'],v:[64,47,21,60,93]},
+      peer:{l:['District 12','Dream','Bronx Center','NY State','Comp Sci High','CSH best (’19)'],v:[38,50,51,56,66,89]}},
+  a2:{dist:[1,9,11,46,4], cls:{l:['Period 2','Period 4','Period 5'],v:[68,97,87]},
+      peer:{l:['S. Bronx Dist.','Bronx Center','NY State','Comp Sci High','CSH best (’24)'],v:[42,60,75,83,97]}},
+  ela:{dist:[3,3,9,24,66],
+      peer:{l:['S. Bronx Dist.','Dream','NY State','Bronx Center','Comp Sci High','CSH best (’25)'],v:[58,72,75,83,92,92]}},
+  gl:{cls:{l:['Grade 10','Grade 11','Overall'],v:[74,91,80]},
+      peer:{l:['S. Bronx Dist.','NY State','Dream','Bronx Center','Comp Sci High','CSH best (’24)'],v:[63,76,77,81,83,88]}}
+};
+// course, exam-goal %, actual June 2026 pass %
+const GOALS=[
+  ['Algebra I — Regular',75,50],
+  ['Algebra I — Honors',85,93],
+  ['Algebra I — Retakers',70,47],
+  ['Algebra II',85,86],
+  ['ELA (Grade 11)',85,94],
+  ['Global History 10',85,74],
+  ['Global History 11',85,91],
+];
+const GR={
+  trend:{l:["T1 ’24-25","T2 ’24-25","T1 ’25-26","T2 ’25-26"], grade:[55,68,73,80], pass:[50,70,61,78]},
+  dept:[ // name, gradeLast, gradeT2, passLast, passT2, ontrack
+    ['Math',73.6,74.8,83,88,'8 / 13'],
+    ['Science',71.0,77.1,78,90,'8 / 9'],
+    ['Computer Sci',77.9,79.2,88,92,'9 / 10'],
+    ['English',73.1,76.9,86,91,'6 / 8'],
+    ['History',75.7,76.9,89,93,'6 / 6'],
+  ]
+};
+const SV={
+  yoyCat:{l:['Climate','Advisory','Safety','Classroom'],f:[63.0,69.8,67.9,75.6],s:[76.2,74.5,72.0,75.4]},
+  up:[['Energy of the school',14.1,64.7,78.8],['Feel like you belong',12.3,61.2,73.5],['Students show you respect',11.9,60.4,72.3],['Advisory fosters belonging',10.2,71.1,81.2],['Advisor checks in on progress',5.3,79.6,84.8],['Physically safe in building',4.7,83.0,87.7]],
+  down:[['Work appropriately challenging',-4.6,75.2,70.7],['Teachers give helpful feedback',-0.8,71.0,70.2],['Important to do well in classes',-0.7,93.6,92.9],['Overall classroom experience',0.4,54.6,55.0]],
+  yrCat:{l:['Classroom','Advisory','Safe (building)','Emotional safety','Belonging','Peer respect','School energy','Main office','Computer lab'],
+         f:[3.88,4.03,4.42,3.95,3.93,3.82,4.04,4.08,4.00], s:[3.94,4.15,4.07,3.75,3.81,3.76,3.87,3.86,3.98]},
+  movers:[['Adults care about me',0.47],['Student ownership',0.34],['Overall value of advisory',0.19],['Enjoy class experience',0.17],['Advisor accountability',0.10],['Teacher support',0.04],['Appropriate challenge',0.02],['Treated fairly (office)',-0.02],['Teachers excited to teach',-0.02],['Comfort with advisor',-0.04],['Peer respect',-0.06],['Feel like I belong',-0.12],['Staff addresses safety',-0.15],['Belonging in advisory',-0.17],['Positive school energy',-0.17],['Main office respectful',-0.21],['Teachers treat with respect',-0.22],['Emotionally safe',-0.20],['Main office helpful',-0.29],['Safe commuting',-0.40],['Safe in building',-0.35],['Motivated to do well',-0.54]],
+  grade:{l:['9th','10th','11th','12th'],f:[4.08,4.06,4.00,3.98],s:[4.07,3.95,3.94,3.93]},
+  adv:[['Ortiz/Reardon','12',6,4.73,4.20],['Clark/Carapezza','9',24,4.51,4.19],['Diverio/Mao','12',7,4.41,4.14],['Thevenin/S. Joseph','9',21,4.33,4.30],['Agrawal/M. Joseph','10',18,4.28,4.08],['Rodriguez/Phillips','9',22,4.27,4.38],['Germain/Sturdy','10',19,4.26,4.11],['Peters/Yuen/L. Ortiz','9',19,4.18,4.06],['Golden','12',24,4.17,null],['Chambers/Medina','11',17,4.14,4.00],['Magaldi/Ryan','12',8,4.08,3.80],['Rahaman/Yang/Haught','9',16,4.06,4.00],['Berrios/Romero','10',21,4.03,null],['Helmer/Gouede','10',19,3.99,4.25],['Skwiersky/Stewart','11',8,3.98,4.00],['Gonzalez/Kelly','11',14,3.92,4.30],['Dolmo/Uddin/Guity','10/11',10,3.91,3.13],['Enriquez/Mosley','10',15,3.91,4.08],['Metchiou/Bute','10/11',17,3.88,3.41],['Bendau/Parcells/Losi','12',12,3.79,4.43]]
+};
+
+/* ---------- chart helpers ---------- */
+const built={};
+function pct(max){return {min:0,max:max||100,ticks:{callback:v=>v+'%'},grid:{color:C.line}};}
+function hbarPass(id,labels,vals,highlightLast){
+  if(highlightLast){ // peer charts: CSH emphasized
+    return new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets:[{data:vals,
+      backgroundColor:labels.map(l=>/Comp Sci|CSH/.test(l)?C.blue:'#b7c2d2'),borderRadius:4}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:c=>c.parsed.x+'%'}}},
+      scales:{x:pct(100),y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+  }
+}
+function showDelta(items){
+  if(!items.length)return'';const ch=items[0].chart,i=items[0].dataIndex;
+  const f=ch.data.datasets[0]?.data[i], s=ch.data.datasets[1]?.data[i];
+  if(f==null||s==null)return'';const d=s-f;
+  return 'Change: '+(d>0?'▲ +':d<0?'▼ ':'~ ')+Math.abs(d).toFixed(2);
+}
+
+function build(scope){
+  if(built[scope])return; built[scope]=true;
+  if(scope==='overview'){
+    new Chart(ov('ovGoals'),{type:'line',data:{labels:GR.trend.l,datasets:[
+      {label:'Met grade goal',data:GR.trend.grade,borderColor:C.blue,backgroundColor:C.blue,tension:.3,borderWidth:2.5,pointRadius:3.5},
+      {label:'Met pass goal',data:GR.trend.pass,borderColor:C.accent,backgroundColor:C.accent,tension:.3,borderWidth:2.5,pointRadius:3.5}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11.5}}}},
+        scales:{y:pct(100),x:{grid:{display:false}}}}});
+  }
+  if(scope==='r-goals'){ goalChart(); goalTable(); }
+  if(scope==='r-alg1'){
+    distChart('a1dist',DATA.a1.dist);
+    classChart('a1class',DATA.a1.cls.l,DATA.a1.cls.v);
+    hbarPass('a1peer',DATA.a1.peer.l,DATA.a1.peer.v,true);
+  }
+  if(scope==='r-alg2'){
+    distChart('a2dist',DATA.a2.dist);
+    classChart('a2class',DATA.a2.cls.l,DATA.a2.cls.v);
+    hbarPass('a2peer',DATA.a2.peer.l,DATA.a2.peer.v,true);
+  }
+  if(scope==='r-ela'){
+    distChart('eladist',DATA.ela.dist);
+    hbarPass('elapeer',DATA.ela.peer.l,DATA.ela.peer.v,true);
+  }
+  if(scope==='r-global'){
+    classChart('glclass',DATA.gl.cls.l,DATA.gl.cls.v);
+    hbarPass('glpeer',DATA.gl.peer.l,DATA.gl.peer.v,true);
+  }
+  if(scope==='grades'){
+    new Chart(ov('grTrend'),{type:'line',data:{labels:GR.trend.l,datasets:[
+      {label:'Met grade goal',data:GR.trend.grade,borderColor:C.blue,backgroundColor:C.blue,tension:.3,borderWidth:2.5,pointRadius:4},
+      {label:'Met pass goal',data:GR.trend.pass,borderColor:C.accent,backgroundColor:C.accent,tension:.3,borderWidth:2.5,pointRadius:4},
+      {label:'Goal',data:[90,90,90,90],borderColor:'#9aa3b0',borderDash:[5,5],borderWidth:1.5,pointRadius:0}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:pct(100),x:{grid:{display:false}}}}});
+    deptChart('grDeptGrade',GR.dept.map(d=>d[0]),GR.dept.map(d=>d[1]),GR.dept.map(d=>d[2]),60,90,'grade');
+    deptChart('grDeptPass',GR.dept.map(d=>d[0]),GR.dept.map(d=>d[3]),GR.dept.map(d=>d[4]),0,100,'pass');
+    grTable();
+  }
+  if(scope==='s-yoy'){
+    cmpChart('yoyCat',SV.yoyCat.l,SV.yoyCat.f,SV.yoyCat.s,50,100,true);
+    listRows('yoyUp',SV.up,true); listRows('yoyDown',SV.down,false);
+  }
+  if(scope==='s-year'){
+    cmpChart('yrCat',SV.yrCat.l,SV.yrCat.f,SV.yrCat.s,3.0,5.0,false);
+    moversChart();
+    cmpChart('yrGrade',SV.grade.l,SV.grade.f,SV.grade.s,3.5,4.5,false);
+    advMini(); advTable();
+  }
+}
+function ov(id){return document.getElementById(id);}
+
+function distChart(id,vals){
+  const cols=['#cdd5df','#cdd5df',C.blue2,C.blue,C.green];
+  new Chart(ov(id),{type:'bar',data:{labels:bandLabels,datasets:[{data:vals,backgroundColor:cols,borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>c.parsed.y+' students'}}},
+      scales:{y:{beginAtZero:true,grid:{color:C.line},ticks:{precision:0}},x:{grid:{display:false}}}}});
+}
+function classChart(id,labels,vals){
+  new Chart(ov(id),{type:'bar',data:{labels,datasets:[{data:vals,
+    backgroundColor:vals.map(v=>v>=85?C.green:v>=65?C.blue:v>=45?C.amber:C.red),borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>c.parsed.y+'% pass'}}},scales:{y:pct(100),x:{grid:{display:false},ticks:{font:{size:11}}}}}});
+}
+function goalChart(){
+  const labels=GOALS.map(g=>g[0]);
+  new Chart(ov('goalChart'),{type:'bar',data:{labels,datasets:[
+    {label:'Goal',data:GOALS.map(g=>g[1]),backgroundColor:'#c5cedb',borderRadius:3},
+    {label:'Actual',data:GOALS.map(g=>g[2]),backgroundColor:GOALS.map(g=>g[2]>=g[1]?C.green:C.red),borderRadius:3}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11}}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x+'%'}}},
+      scales:{x:pct(100),y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+}
+function goalTable(){
+  document.getElementById('goalTable').innerHTML=GOALS.map(g=>{
+    const met=g[2]>=g[1], d=g[2]-g[1];
+    return `<tr><td style="font-weight:600">${g[0]}</td><td class="num">${g[1]}%</td><td class="num">${g[2]}%</td>
+      <td><span class="pill ${met?'u':'d'}">${met?'▲ met +'+d:'▼ missed '+d}</span></td></tr>`;
+  }).join('');
+}
+function deptChart(id,labels,lastYr,cur,min,max,kind){
+  new Chart(ov(id),{type:'bar',data:{labels,datasets:[
+    {label:'’24–25',data:lastYr,backgroundColor:'#c5cedb',borderRadius:3},
+    {label:'T2 ’25–26',data:cur,backgroundColor:kind==='pass'?C.green:C.blue,borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11}}},
+      tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+(kind==='pass'?'%':'')}}},
+      scales:{y:{min,max,grid:{color:C.line},ticks:{callback:v=>kind==='pass'?v+'%':v}},x:{grid:{display:false}}}}});
+}
+function cmpChart(id,labels,f,s,min,max,isPct){
+  new Chart(ov(id),{type:'bar',data:{labels,datasets:[
+    {label:'Fall',data:f,backgroundColor:C.fall+'D9',borderRadius:3},
+    {label:'Spring/Later',data:s,backgroundColor:C.spring+'D9',borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(isPct?1:2)+(isPct?'%':''),afterBody:showDelta}}},
+      scales:{y:{min,max,grid:{color:C.line},ticks:{callback:v=>isPct?v+'%':v.toFixed(1)}},
+        x:{grid:{display:false},ticks:{font:{size:10.5},maxRotation:40,minRotation:0,autoSkip:false}}}}});
+}
+function moversChart(){
+  const d=SV.movers;
+  new Chart(ov('yrMovers'),{type:'bar',data:{labels:d.map(x=>x[0]),datasets:[{data:d.map(x=>x[1]),
+    backgroundColor:d.map(x=>x[1]>=0?C.green+'D9':C.red+'D9'),borderRadius:3}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>(c.parsed.x>=0?'+':'')+c.parsed.x.toFixed(2)+' since fall'}}},
+      scales:{x:{suggestedMin:-0.6,suggestedMax:0.6,grid:{color:C.line},ticks:{callback:v=>(v>0?'+':'')+v}},
+        y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+}
+function listRows(id,rows,up){
+  document.getElementById(id).innerHTML=rows.map(r=>{
+    const d=r[1],pos=d>=0;
+    return `<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f1f3f5">
+      <div style="flex:1"><div style="font-weight:600;font-size:13px;color:#16263d">${r[0]}</div>
+      <div style="font-size:11px;color:#9aa3b0">${r[2].toFixed(1)}% → ${r[3].toFixed(1)}%</div></div>
+      <span class="pill ${pos&&d>0.5?'u':d< -0.5?'d':'f'}">${pos?'▲ +':'▼ '}${Math.abs(d).toFixed(1)}</span></div>`;
+  }).join('');
+}
+function grTable(){
+  document.getElementById('grTable').innerHTML=GR.dept.map(d=>{
+    const dg=(d[2]-d[1]),dp=(d[4]-d[3]);
+    const pg=dg>=0?`<span class="pill u">▲ ${dg.toFixed(1)}</span>`:`<span class="pill d">▼ ${Math.abs(dg).toFixed(1)}</span>`;
+    const pp=dp>=0?`<span class="pill u">▲ ${dp}</span>`:`<span class="pill d">▼ ${Math.abs(dp)}</span>`;
+    return `<tr><td style="font-weight:600">${d[0]}</td><td class="num">${d[1].toFixed(1)}</td>
+      <td class="num">${d[2].toFixed(1)} ${pg}</td><td class="num">${d[3]}%</td>
+      <td class="num">${d[4]}% ${pp}</td><td class="num">${d[5]}</td></tr>`;
+  }).join('');
+}
+function advMini(){
+  const s=[...SV.adv].sort((a,b)=>b[3]-a[3]);
+  const top=s.slice(0,3),bot=s.slice(-3).reverse();
+  const row=(a)=>`<div style="display:flex;justify-content:space-between;padding:5px 0;font-size:12.5px;border-bottom:1px solid #f1f3f5">
+     <span style="color:#16263d">${a[0]} <span style="color:#9aa3b0">· ${a[1]}</span></span>
+     <span style="font-weight:700;color:${a[3]>=4.1?'#0F6E56':a[3]<3.95?'#9b3a1d':'#16263d'}">${a[3].toFixed(2)}</span></div>`;
+  document.getElementById('advMini').innerHTML=
+    '<div style="font-size:10.5px;font-weight:700;color:#9aa3b0;text-transform:uppercase;letter-spacing:.4px;margin:4px 0 2px">Highest</div>'+
+    top.map(row).join('')+
+    '<div style="font-size:10.5px;font-weight:700;color:#9aa3b0;text-transform:uppercase;letter-spacing:.4px;margin:10px 0 2px">Lowest</div>'+
+    bot.map(row).join('');
+}
+function advTable(){
+  const s=[...SV.adv].sort((a,b)=>b[3]-a[3]);
+  document.getElementById('advTable').innerHTML=s.map(a=>{
+    const diff=a[4]!=null?(a[3]-a[4]):null;
+    const pill=diff==null?'<span class="pill f">new</span>':diff>0.1?`<span class="pill u">▲ ${diff.toFixed(2)}</span>`:diff< -0.1?`<span class="pill d">▼ ${Math.abs(diff).toFixed(2)}</span>`:'<span class="pill f">~ flat</span>';
+    return `<tr><td style="font-weight:500">${a[0]}</td><td style="color:#9aa3b0">${a[1]}</td><td style="color:#9aa3b0">${a[2]}</td>
+      <td class="num" style="color:${C.spring}">${a[3].toFixed(2)}</td>
+      <td class="num" style="color:${C.fall}">${a[4]!=null?a[4].toFixed(2):'—'}</td><td>${pill}</td></tr>`;
+  }).join('');
+}
+
+/* ---------- navigation ---------- */
+function tab(id,btn){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('section.tab').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+  build(id);
+  const act=document.querySelector('#'+id+' .sub.active');
+  if(act)build(act.id);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function sub(group,id,btn){
+  const full=(group==='r'?'r-':'s-')+id;
+  const container=btn.closest('section');
+  container.querySelectorAll('.subnav button').forEach(b=>b.classList.remove('active'));
+  container.querySelectorAll('.sub').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(full).classList.add('active');
+  build(full);
+}
+
+/* initial */
+build('overview');
+</script>
+</body>
+</html>
