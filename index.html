@@ -233,7 +233,7 @@
     </div>
     <div class="panel">
       <h4>CSH vs. district, state &amp; peer schools</h4>
-      <p class="cap">Algebra I pass rate. Per State of CSH Data Review (most recent reported).</p>
+      <p class="cap">Algebra I pass rate. CSH = 2026 (full Jan+June cohort); comparisons per State of CSH Data Review.</p>
       <div class="chartbox" style="height:230px"><canvas id="a1peer"></canvas></div>
     </div>
   </div>
@@ -261,7 +261,7 @@
     </div>
     <div class="panel">
       <h4>CSH vs. district, state &amp; peer schools</h4>
-      <p class="cap">Algebra II pass rate. Per State of CSH Data Review (most recent reported).</p>
+      <p class="cap">Algebra II pass rate. CSH = June 2026 actual; comparisons per State of CSH Data Review.</p>
       <div class="chartbox" style="height:230px"><canvas id="a2peer"></canvas></div>
     </div>
   </div>
@@ -283,7 +283,7 @@
       </div>
       <div class="panel">
         <h4>CSH vs. district, state &amp; peer schools</h4>
-        <p class="cap">ELA pass rate. Per State of CSH Data Review (most recent reported).</p>
+        <p class="cap">ELA pass rate. CSH = June 2026 actual; comparisons per State of CSH Data Review.</p>
         <div class="chartbox" style="height:270px"><canvas id="elapeer"></canvas></div>
       </div>
     </div>
@@ -306,7 +306,7 @@
       </div>
       <div class="panel">
         <h4>CSH vs. district, state &amp; peer schools</h4>
-        <p class="cap">Global History pass rate. Per State of CSH Data Review (most recent reported).</p>
+        <p class="cap">Global History pass rate. CSH = June 2026 overall; comparisons per State of CSH Data Review.</p>
         <div class="chartbox" style="height:270px"><canvas id="glpeer"></canvas></div>
       </div>
     </div>
@@ -477,13 +477,13 @@ Chart.defaults.color=C.mut;
 const bandLabels=['<55','55–64','65–74','75–84','85–100'];
 const DATA={
   a1:{dist:[17,35,51,18,8], cls:{l:['P1 Reg','P2 Retake','P4 Reg','P5 Reg','P6 Honors'],v:[64,47,21,60,93]},
-      peer:{l:['District 12','Dream','Bronx Center','NY State','Comp Sci High','CSH best (’19)'],v:[38,50,51,56,66,89]}},
+      peer:{l:['District 12','Dream','Bronx Center','NY State','Comp Sci High','CSH best (’19)'],v:[38,50,51,56,65,89]}},
   a2:{dist:[1,9,11,46,4], cls:{l:['Period 2','Period 4','Period 5'],v:[68,97,87]},
-      peer:{l:['S. Bronx Dist.','Bronx Center','NY State','Comp Sci High','CSH best (’24)'],v:[42,60,75,83,97]}},
+      peer:{l:['S. Bronx Dist.','Bronx Center','NY State','Comp Sci High','CSH best (’24)'],v:[42,60,75,86,97]}},
   ela:{dist:[3,3,9,24,66],
-      peer:{l:['S. Bronx Dist.','Dream','NY State','Bronx Center','Comp Sci High','CSH best (’25)'],v:[58,72,75,83,92,92]}},
+      peer:{l:['S. Bronx Dist.','Dream','NY State','Bronx Center','Comp Sci High','CSH best (’25)'],v:[58,72,75,83,94,94]}},
   gl:{cls:{l:['Grade 10','Grade 11','Overall'],v:[74,91,80]},
-      peer:{l:['S. Bronx Dist.','NY State','Dream','Bronx Center','Comp Sci High','CSH best (’24)'],v:[63,76,77,81,83,88]}}
+      peer:{l:['S. Bronx Dist.','NY State','Dream','Comp Sci High','Bronx Center','CSH best (’24)'],v:[63,76,77,80,81,88]}}
 };
 // course, exam-goal %, actual June 2026 pass %
 const GOALS=[
