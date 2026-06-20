@@ -107,6 +107,9 @@
     .nav button{padding:11px 11px;font-size:12.5px;}
     .card .val{font-size:26px;}
   }
+  .ps-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+  .ps-chip{font-size:12px;background:#eef2f7;color:#16263d;border:1px solid #dde4ec;border-radius:20px;padding:4px 11px}
+  .ps-chip b{color:#155DA8}
 </style>
 </head>
 <body>
@@ -117,7 +120,7 @@
     <div id="mono" class="mast-mono">CSH</div>
     <div class="mast-txt">
       <h1>2025–26 Results &amp; Outcomes</h1>
-      <p>Regents &middot; Course grades by department &middot; Student experience</p>
+      <p>Regents &middot; Course grades &middot; Student experience &middot; Postsecondary</p>
     </div>
     <div class="mast-badges">
       <span class="mb">June 2026 Regents</span>
@@ -133,6 +136,7 @@
     <button onclick="tab('regents',this)">Regents Exams</button>
     <button onclick="tab('grades',this)">Grades by Department</button>
     <button onclick="tab('survey',this)">Student Experience</button>
+    <button onclick="tab('postsec',this)">Postsecondary</button>
   </div>
 </div>
 
@@ -145,7 +149,7 @@
   <p class="sec-sub">June 2026 Regents pass rates, course-goal attainment for Trimester 2, and the movement in student experience. Every figure is school-level and de-identified.</p>
 
   <div class="callout info">
-    <b>How to read this site.</b> The <b>Regents</b> tab breaks down each June 2026 exam — including how results stacked up against this year's exam goals — with score distributions, results by class, and comparisons to district, state, and peer schools. <b>Grades by Department</b> tracks the instructional priority of 90% of courses meeting their grade and pass-rate goals. <b>Student Experience</b> follows the full survey arc from Fall 2024 through June 2026. Additional exams and AP results can be added as they come in.
+    <b>How to read this site.</b> The <b>Regents</b> tab breaks down each June 2026 exam — including how results stacked up against this year's exam goals — with score distributions, results by class, and comparisons to district, state, and peer schools. <b>Grades by Department</b> tracks the instructional priority of 90% of courses meeting their grade and pass-rate goals. <b>Student Experience</b> follows the full survey arc from Fall 2024 through June 2026, and <b>Postsecondary</b> shows where the Class of 2026 is headed after CSH. Additional exams and AP results can be added as they come in.
   </div>
 
   <div class="eyebrow" style="margin-top:6px">June 2026 Regents — pass rate (scale score ≥ 65)</div>
@@ -174,6 +178,43 @@
     </div>
   </div>
 
+</section>
+
+<!-- ============ POSTSECONDARY ============ -->
+<section id="postsec" class="tab">
+  <div class="eyebrow">Class of 2026 &middot; June matriculation</div>
+  <h2 class="sec">Postsecondary Outcomes</h2>
+  <p class="sec-sub">Where the Class of 2026 is headed after CSH. Figures are de-identified counts across 99 seniors — no student-level information is shown.</p>
+
+  <div class="callout good"><b>A standout college list.</b> Seniors are matriculating to <b>42 colleges</b> — including <b>4 Ivy League universities</b> (Yale, Princeton, Columbia, Dartmouth) and nationally ranked schools such as Northwestern, Notre Dame, Pomona, Swarthmore, Middlebury, Barnard, and NYU. Nearly three in four are headed to a four-year college.</div>
+
+  <div class="cards">
+    <div class="card bl"><div class="lab">Seniors tracked</div><div class="val">99</div><div class="sub">Class of 2026</div></div>
+    <div class="card gr"><div class="lab">To a 4-year college</div><div class="val">74<small>%</small></div><div class="sub">73 of 99 students</div></div>
+    <div class="card bl"><div class="lab">Colleges represented</div><div class="val">42</div><div class="sub">distinct institutions</div></div>
+    <div class="card gr"><div class="lab">Ivy + top-ranked</div><div class="val">23</div><div class="sub">students · incl. 4 Ivies</div></div>
+  </div>
+
+  <div class="grid2" style="margin-top:22px">
+    <div class="panel">
+      <h4>Where the class is headed</h4>
+      <p class="cap">Postsecondary destination by sector (share of 99 seniors).</p>
+      <div class="chartbox" style="height:280px"><canvas id="psSector"></canvas></div>
+    </div>
+    <div class="panel">
+      <h4>Top destinations</h4>
+      <p class="cap">Colleges with the most matriculants (3 or more students).</p>
+      <div class="chartbox" style="height:280px"><canvas id="psTop"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:18px">
+    <h4>Selective &amp; nationally ranked matriculations</h4>
+    <p class="cap">Ivy League, top liberal-arts, and national research universities on the Class of 2026 list. &ldquo;&times;n&rdquo; marks where more than one student enrolled.</p>
+    <div id="psSelective" class="ps-chips"></div>
+  </div>
+
+  <div class="callout info" style="margin-top:16px"><b>Financial aid.</b> Many four-year matriculants secured full or near-full aid packages — including 11 students admitted to NYU on full SPS packages, and numerous HEOP/EOP scholarships at private colleges.</div>
 </section>
 
 <!-- ============ REGENTS ============ -->
@@ -458,9 +499,10 @@
     <a href="https://docs.google.com/presentation/d/1s-C4GsefwwE00cePfooqlHcghjWuZkQb9wqn62EJ2I0/edit" target="_blank">Comp Sci High T2 ’25–26 Data Review (Slides)</a> ·
     <a href="https://docs.google.com/spreadsheets/d/13MS1v3H9OWPtmN1fPXgSFIuQsCbLJe4rVYVI3cUwV0s/edit" target="_blank">2025–26 Key Results by Course</a><br>
     Peer / state / district comparisons: State of CSH Data Review — End of Trimester One Edition (Dec 4, 2025)<br>
-    Student experience: CSH Student Experience Surveys — Fall 2024, Fall 2025, Spring 2026 (internal)
+    Student experience: CSH Student Experience Surveys — Fall 2024, Fall 2025, Spring 2026 (internal)<br>
+    Postsecondary: PSL G12 Milestone Tracker 2025–26 (internal) — reported as de-identified counts; no student-level data is published
   </div>
-  <div class="disc">Regents pass rate = scale score ≥ 65. Algebra I cohort rate combines the January and June administrations (152 students); other figures reflect the June 2026 sitting. Comparison figures for district, state, and peer schools (District 12 / South Bronx, NY State, Bronx Center for Science and Math, Dream Charter) are reproduced from the State of CSH Data Review and reflect the most recent reported year, not necessarily June 2026. All data is school-level and de-identified. Built for internal review.</div>
+  <div class="disc">Regents pass rate = scale score ≥ 65. Algebra I cohort rate combines the January and June administrations (152 students); other figures reflect the June 2026 sitting. Comparison figures for district, state, and peer schools (District 12 / South Bronx, NY State, Bronx Center for Science and Math, Dream Charter) are reproduced from the State of CSH Data Review and reflect the most recent reported year, not necessarily June 2026. All data is school-level and de-identified. Postsecondary figures reflect June 2026 matriculation decisions (n = 99) and may shift over the summer. Built for internal review.</div>
 </footer>
 
 </div>
@@ -518,6 +560,12 @@ const SV={
 
 /* ---------- chart helpers ---------- */
 const built={};
+const PS={
+  n:99,
+  sector:{l:['Private 4-yr','CUNY 4-yr','SUNY 4-yr','Community (2-yr)','Other / gap'],v:[43,22,8,18,8]},
+  top:[['New York University',11],['BMCC',8],['Bronx CC',8],['City College (CCNY)',6],['John Jay',5],['Lehman',5],['City Tech',3]],
+  selective:[['Yale',1],['Princeton',2],['Columbia',1],['Dartmouth',2],['Northwestern',2],['Notre Dame',1],['Boston College',2],['Pomona',2],['Swarthmore',1],['Middlebury',1],['Haverford',1],['Hamilton',1],['Barnard',2],['Smith',1],['Colgate',1],['Trinity',1],['Skidmore',1]]
+};
 function pct(max){return {min:0,max:max||100,ticks:{callback:v=>v+'%'},grid:{color:C.line}};}
 function hbarPass(id,labels,vals,highlightLast){
   if(highlightLast){ // peer charts: CSH emphasized
@@ -543,6 +591,19 @@ function build(scope){
       {label:'Met pass goal',data:GR.trend.pass,borderColor:C.accent,backgroundColor:C.accent,tension:.3,borderWidth:2.5,pointRadius:3.5}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11.5}}}},
         scales:{y:pct(100),x:{grid:{display:false}}}}});
+  }
+  if(scope==='postsec'){
+    new Chart(ov('psSector'),{type:'doughnut',data:{labels:PS.sector.l,
+      datasets:[{data:PS.sector.v,backgroundColor:[C.blue,C.blue2,C.accent,C.amber,'#c5cedb'],borderColor:'#fff',borderWidth:2}]},
+      options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
+        plugins:{legend:{position:'right',labels:{boxWidth:12,font:{size:11.5}}},
+          tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+' ('+Math.round(c.parsed/PS.n*100)+'%)'}}}}});
+    new Chart(ov('psTop'),{type:'bar',data:{labels:PS.top.map(x=>x[0]),
+      datasets:[{data:PS.top.map(x=>x[1]),backgroundColor:PS.top.map(x=>x[0]==='New York University'?C.blue:'#7d93b0'),borderRadius:4}]},
+      options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:c=>c.parsed.x+' students'}}},
+        scales:{x:{beginAtZero:true,grid:{color:C.line},ticks:{precision:0}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+    ov('psSelective').innerHTML=[...PS.selective].sort((a,b)=>b[1]-a[1]).map(s=>`<span class="ps-chip">${s[0]}${s[1]>1?' <b>×'+s[1]+'</b>':''}</span>`).join('');
   }
   if(scope==='r-goals'){ goalChart(); goalTable(); }
   if(scope==='r-alg1'){
