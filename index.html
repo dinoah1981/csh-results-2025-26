@@ -166,6 +166,7 @@
     <div class="card gr"><div class="lab">Algebra II</div><div class="val">86<small>%</small></div><div class="sub">61 of 71 examinees</div></div>
     <div class="card gr"><div class="lab">ELA</div><div class="val">94<small>%</small></div><div class="sub">99 of 105 examinees</div></div>
     <div class="card gr"><div class="lab">Global History</div><div class="val">80<small>%</small></div><div class="sub">147 of 183 examinees</div></div>
+    <div class="card bl"><div class="lab">Biology</div><div class="val">77<small>%</small></div><div class="sub">69 of 90 · new Regents exam</div></div>
   </div>
 
   <div class="grid2" style="margin-top:22px">
@@ -192,12 +193,13 @@
 <section id="postsec" class="tab">
   <div class="eyebrow">Class of 2026 &middot; June matriculation</div>
   <h2 class="sec">Postsecondary Outcomes</h2>
-  <p class="sec-sub">Where the Class of 2026 is headed after CSH. Figures are de-identified counts — no student-level information is shown. Of 99 seniors in the cohort, <b>96 are graduating</b> this June; 3 are repeating senior year.</p>
+  <p class="sec-sub">Where the Class of 2026 is headed after CSH. Figures are de-identified counts — no student-level information is shown. Of 99 seniors in the cohort, <b>96 are graduating</b> this June and <b>3 are not</b> (repeating senior year); 3 additional graduates are flagged as possible repeats.</p>
 
   <div class="callout good"><b>A standout college list.</b> Graduating seniors are matriculating to <b>42 colleges</b> — including <b>4 Ivy League universities</b> (Yale, Princeton, Columbia, Dartmouth) and top-ranked schools such as Northwestern, Notre Dame, Pomona, Swarthmore, Middlebury, Barnard, and NYU. More than three in four are headed to a four-year college.</div>
 
   <div class="cards">
-    <div class="card bl"><div class="lab">Graduating seniors</div><div class="val">96</div><div class="sub">of 99 cohort · 3 repeating</div></div>
+    <div class="card bl"><div class="lab">Graduating seniors</div><div class="val">96</div><div class="sub">of 99 cohort</div></div>
+    <div class="card"><div class="lab">Not graduating</div><div class="val">3</div><div class="sub">repeating senior year · +3 possible</div></div>
     <div class="card gr"><div class="lab">To a 4-year college</div><div class="val">76<small>%</small></div><div class="sub">73 of 96 graduates</div></div>
     <div class="card bl"><div class="lab">Colleges represented</div><div class="val">42</div><div class="sub">distinct institutions</div></div>
     <div class="card gr"><div class="lab">To a top-ranked college</div><div class="val">34</div><div class="sub">US News top-50 · incl. 4 Ivies</div></div>
@@ -240,16 +242,17 @@
     <button onclick="sub('r','alg2',this)">Algebra II</button>
     <button onclick="sub('r','ela',this)">ELA</button>
     <button onclick="sub('r','global',this)">Global History</button>
+    <button onclick="sub('r','bio',this)">Biology</button>
   </div>
 
   <!-- GOAL SCORECARD -->
   <div id="r-goals" class="sub active">
-    <div class="callout info" style="margin:14px 0 2px">June 2026 exam results measured against this year's per-course exam Key Results. <b>4 of 7 exam pass-rate goals were met.</b> The misses to target next year: regular and retake Algebra I, and Global History in 10th grade.</div>
+    <div class="callout info" style="margin:14px 0 2px">June 2026 exam results measured against this year's per-course exam Key Results. <b>4 of 8 exam pass-rate goals were met.</b> Biology, in its first year as the new NYS Regents exam, came within a single point of its goal (77% vs 78%). The misses to target next year: regular and retake Algebra I, and Global History in 10th grade.</div>
     <div class="cards" style="margin-top:14px">
-      <div class="card gr"><div class="lab">Exam goals met</div><div class="val">4<small> / 7</small></div><div class="sub">exam pass-rate KRs</div></div>
+      <div class="card gr"><div class="lab">Exam goals met</div><div class="val">4<small> / 8</small></div><div class="sub">exam pass-rate KRs</div></div>
       <div class="card gr"><div class="lab">Biggest beat</div><div class="val">+9</div><div class="sub">ELA: 94% vs 85% goal</div></div>
       <div class="card rd"><div class="lab">Biggest gap</div><div class="val">−25</div><div class="sub">Alg I regular: 50% vs 75%</div></div>
-      <div class="card"><div class="lab">Just cleared</div><div class="val">+1</div><div class="sub">Alg II: 86% vs 85%</div></div>
+      <div class="card am"><div class="lab">Closest miss</div><div class="val">−1</div><div class="sub">Biology: 77% vs 78%</div></div>
     </div>
     <div class="panel">
       <h4>Pass rate vs. exam goal — by course</h4>
@@ -259,7 +262,7 @@
     <div class="tbl-wrap">
       <table><thead><tr><th>Course</th><th>Exam goal</th><th>Actual — June ’26</th><th>Result</th></tr></thead><tbody id="goalTable"></tbody></table>
     </div>
-    <div class="note">Exam Key Results from the 2025–26 Key Results by Course. Algebra II is shown at the overall level against the primary Honors goal (85%); the separate “Alg 2 B” exam goal (50% pass) was also met. “Algebra I — Regular” combines the three non-honors June sections.</div>
+    <div class="note">Exam Key Results from the 2025–26 Key Results by Course. Algebra II is shown at the overall level against the primary Honors goal (85%); the separate “Alg 2 B” exam goal (50% pass) was also met. “Algebra I — Regular” combines the three non-honors June sections. Biology is measured against the Principles of Biology exam goal (78% pass the new Regents Biology exam).</div>
   </div>
 
   <!-- ALGEBRA I -->
@@ -362,6 +365,30 @@
         <div class="chartbox" style="height:270px"><canvas id="glpeer"></canvas></div>
       </div>
     </div>
+  </div>
+
+  <!-- BIOLOGY -->
+  <div id="r-bio" class="sub">
+    <div class="callout warn" style="margin:14px 0 2px">In the <b>first administration of the new NYS Life Science: Biology Regents</b>, Biology passed at <b>77%</b> — landing within a single point of its 78% exam goal. The class clusters tightly around the cut score: <b>41 of 90</b> students sit in the 65–74 band, so a modest lift on the next sitting moves the pass rate meaningfully. Mastery (85+) is the growth area, with just 3 students in the top band.</div>
+    <div class="cards" style="margin-top:14px">
+      <div class="card bl"><div class="lab">Pass rate</div><div class="val">77<small>%</small></div><div class="sub">69 of 90 examinees</div></div>
+      <div class="card"><div class="lab">Mean scale</div><div class="val">68</div><div class="sub">median 69</div></div>
+      <div class="card"><div class="lab">Approaching mastery</div><div class="val">31<small>%</small></div><div class="sub">28 scored 75+</div></div>
+      <div class="card am"><div class="lab">Mastery ≥ 85</div><div class="val">3<small>%</small></div><div class="sub">3 of 90</div></div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="panel">
+        <h4>Score distribution — June 2026</h4>
+        <p class="cap">Count of students in each scale-score band. 65 = passing. The 65–74 band is the largest.</p>
+        <div class="chartbox" style="height:270px"><canvas id="biodist"></canvas></div>
+      </div>
+      <div class="panel">
+        <h4>Pass rate vs. exam goal</h4>
+        <p class="cap">June 2026 result against the Principles of Biology exam Key Result (78%). A near-miss in year one of the new exam.</p>
+        <div class="chartbox" style="height:270px"><canvas id="biogoal"></canvas></div>
+      </div>
+    </div>
+    <div class="note">First administration of the redesigned NYS Life Science: Biology Regents. Figures computed from internal grading sheets (unofficial scaled scores); no district, state, or peer comparison is published for the new exam's first year.</div>
   </div>
 </section>
 
@@ -501,7 +528,7 @@
 <footer>
   <div class="eyebrow">Sources &amp; references</div>
   <div class="refs">
-    Regents (June 2026), computed from internal grading sheets (Algebra I, Algebra II, ELA, and Global History).<br>
+    Regents (June 2026), computed from internal grading sheets (Algebra I, Algebra II, ELA, Global History, and Biology).<br>
     Course grades: Comp Sci High T2 ’25–26 Data Review and 2025–26 Key Results by Course (internal).<br>
     Peer / state / district comparisons: State of CSH Data Review — End of Trimester One Edition (Dec 4, 2025)<br>
     Student experience: CSH Student Experience Surveys — Fall 2024, Fall 2025, Spring 2026 (internal)<br>
@@ -530,7 +557,8 @@ const DATA={
   ela:{dist:[3,3,9,24,66],
       peer:{l:['S. Bronx Dist.','Dream','NY State','Bronx Center','Comp Sci High','CSH best (’25)'],v:[58,72,75,83,94,94]}},
   gl:{cls:{l:['Grade 10','Grade 11','Overall'],v:[74,91,80]},
-      peer:{l:['S. Bronx Dist.','NY State','Dream','Comp Sci High','Bronx Center','CSH best (’24)'],v:[63,76,77,80,81,88]}}
+      peer:{l:['S. Bronx Dist.','NY State','Dream','Comp Sci High','Bronx Center','CSH best (’24)'],v:[63,76,77,80,81,88]}},
+  bio:{dist:[15,6,41,25,3], goal:78, actual:77, pass:69, n:90}
 };
 // course, exam-goal %, actual June 2026 pass %
 const GOALS=[
@@ -541,6 +569,7 @@ const GOALS=[
   ['ELA (Grade 11)',85,94],
   ['Global History 10',85,74],
   ['Global History 11',85,91],
+  ['Biology',78,77],
 ];
 const GR={
   trend:{l:["T1 ’24-25","T2 ’24-25","T1 ’25-26","T2 ’25-26"], grade:[55,68,73,80], pass:[50,70,61,78]},
@@ -633,6 +662,10 @@ function build(scope){
     classChart('glclass',DATA.gl.cls.l,DATA.gl.cls.v);
     hbarPass('glpeer',DATA.gl.peer.l,DATA.gl.peer.v,true);
   }
+  if(scope==='r-bio'){
+    distChart('biodist',DATA.bio.dist);
+    bioGoalChart();
+  }
   if(scope==='grades'){
     new Chart(ov('grTrend'),{type:'line',data:{labels:GR.trend.l,datasets:[
       {label:'Met grade goal',data:GR.trend.grade,borderColor:C.blue,backgroundColor:C.blue,tension:.3,borderWidth:2.5,pointRadius:4},
@@ -678,6 +711,14 @@ function goalChart(){
       plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11}}},
         tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x+'%'}}},
       scales:{x:pct(100),y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+}
+function bioGoalChart(){
+  const b=DATA.bio;
+  new Chart(ov('biogoal'),{type:'bar',data:{labels:['Exam goal','Actual — June ’26'],
+    datasets:[{data:[b.goal,b.actual],backgroundColor:['#c5cedb',b.actual>=b.goal?C.green:C.amber],borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>c.parsed.y+'% pass rate'}}},
+      scales:{y:pct(100),x:{grid:{display:false},ticks:{font:{size:12}}}}}});
 }
 function goalTable(){
   document.getElementById('goalTable').innerHTML=GOALS.map(g=>{
