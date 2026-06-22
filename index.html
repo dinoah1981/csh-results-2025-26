@@ -604,7 +604,7 @@ const PS={
   natl:[['Princeton',1,2],['Yale',4,1],['Northwestern',7,2],['Dartmouth',13,2],['Columbia',15,1],['Notre Dame',20,1],['New York University',32,11],['Boston College',36,2]],
   lac:[['Swarthmore',4,1],['Pomona',7,2],['Middlebury',13,1],['Hamilton',13,1],['Barnard',13,2],['Smith',13,1],['Colgate',23,1],['Haverford',24,1],['Skidmore',37,1],['Trinity',37,1]]
 };
-function pct(max){return {min:0,max:max||100,ticks:{callback:v=>v+'%'},grid:{color:C.line}};}
+function pct(max,min){return {min:min||0,max:max||100,ticks:{callback:v=>v+'%'},grid:{color:C.line}};}
 function hbarPass(id,labels,vals,highlightLast){
   if(highlightLast){ // peer charts: CSH emphasized
     return new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets:[{data:vals,
@@ -628,7 +628,7 @@ function build(scope){
       {label:'Met grade goal',data:GR.trend.grade,borderColor:C.blue,backgroundColor:C.blue,tension:.3,borderWidth:2.5,pointRadius:3.5},
       {label:'Met pass goal',data:GR.trend.pass,borderColor:C.accent,backgroundColor:C.accent,tension:.3,borderWidth:2.5,pointRadius:3.5}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11.5}}}},
-        scales:{y:pct(100),x:{grid:{display:false}}}}});
+        scales:{y:pct(100,40),x:{grid:{display:false}}}}});
   }
   if(scope==='postsec'){
     new Chart(ov('psSector'),{type:'doughnut',data:{labels:PS.sector.l,
@@ -673,7 +673,7 @@ function build(scope){
       {label:'Met grade goal',data:GR.trend.grade,borderColor:C.blue,backgroundColor:C.blue,tension:.3,borderWidth:2.5,pointRadius:4},
       {label:'Met pass goal',data:GR.trend.pass,borderColor:C.accent,backgroundColor:C.accent,tension:.3,borderWidth:2.5,pointRadius:4},
       {label:'Goal',data:[90,90,90,90],borderColor:'#9aa3b0',borderDash:[5,5],borderWidth:1.5,pointRadius:0}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:pct(100),x:{grid:{display:false}}}}});
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:pct(100,40),x:{grid:{display:false}}}}});
     deptChart('grDeptGrade',GR.dept.map(d=>d[0]),GR.dept.map(d=>d[1]),GR.dept.map(d=>d[2]),60,90,'grade');
     deptChart('grDeptPass',GR.dept.map(d=>d[0]),GR.dept.map(d=>d[3]),GR.dept.map(d=>d[4]),40,100,'pass');
     grTable();
@@ -712,7 +712,7 @@ function goalChart(){
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11}}},
         tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x+'%'}}},
-      scales:{x:pct(100),y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+      scales:{x:pct(100,40),y:{grid:{display:false},ticks:{font:{size:11}}}}}});
 }
 function bioGoalChart(){
   const b=DATA.bio;
@@ -720,7 +720,7 @@ function bioGoalChart(){
     datasets:[{data:[b.goal,b.actual],backgroundColor:['#c5cedb',b.actual>=b.goal-GOAL_TOL?C.green:C.red],borderRadius:4}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
       tooltip:{callbacks:{label:c=>c.parsed.y+'% pass rate'}}},
-      scales:{y:pct(100),x:{grid:{display:false},ticks:{font:{size:12}}}}}});
+      scales:{y:pct(100,40),x:{grid:{display:false},ticks:{font:{size:12}}}}}});
 }
 function goalTable(){
   document.getElementById('goalTable').innerHTML=GOALS.map(g=>{
