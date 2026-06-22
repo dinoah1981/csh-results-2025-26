@@ -675,7 +675,7 @@ function build(scope){
       {label:'Goal',data:[90,90,90,90],borderColor:'#9aa3b0',borderDash:[5,5],borderWidth:1.5,pointRadius:0}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:pct(100),x:{grid:{display:false}}}}});
     deptChart('grDeptGrade',GR.dept.map(d=>d[0]),GR.dept.map(d=>d[1]),GR.dept.map(d=>d[2]),60,90,'grade');
-    deptChart('grDeptPass',GR.dept.map(d=>d[0]),GR.dept.map(d=>d[3]),GR.dept.map(d=>d[4]),0,100,'pass');
+    deptChart('grDeptPass',GR.dept.map(d=>d[0]),GR.dept.map(d=>d[3]),GR.dept.map(d=>d[4]),40,100,'pass');
     grTable();
   }
   if(scope==='s-yoy'){
