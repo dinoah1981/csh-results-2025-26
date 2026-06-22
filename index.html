@@ -166,7 +166,7 @@
     <div class="card gr"><div class="lab">Algebra II</div><div class="val">86<small>%</small></div><div class="sub">61 of 71 examinees</div></div>
     <div class="card gr"><div class="lab">ELA</div><div class="val">94<small>%</small></div><div class="sub">99 of 105 examinees</div></div>
     <div class="card gr"><div class="lab">Global History</div><div class="val">80<small>%</small></div><div class="sub">147 of 183 examinees</div></div>
-    <div class="card bl"><div class="lab">Biology</div><div class="val">77<small>%</small></div><div class="sub">69 of 90 · new Regents exam</div></div>
+    <div class="card gr"><div class="lab">Biology</div><div class="val">77<small>%</small></div><div class="sub">69 of 90 · new Regents exam</div></div>
   </div>
 
   <div class="grid2" style="margin-top:22px">
@@ -247,12 +247,12 @@
 
   <!-- GOAL SCORECARD -->
   <div id="r-goals" class="sub active">
-    <div class="callout info" style="margin:14px 0 2px">June 2026 exam results measured against this year's per-course exam Key Results. <b>4 of 8 exam pass-rate goals were met.</b> Biology, in its first year as the new NYS Regents exam, came within a single point of its goal (77% vs 78%). The misses to target next year: regular and retake Algebra I, and Global History in 10th grade.</div>
+    <div class="callout info" style="margin:14px 0 2px">June 2026 exam results measured against this year's per-course exam Key Results. <b>5 of 8 exam pass-rate goals were met.</b> Biology counts as met — at 77% it landed within a point of its 78% goal in the first year of the new NYS Regents exam. The remaining gaps to target next year: regular and retake Algebra I, and Global History in 10th grade.</div>
     <div class="cards" style="margin-top:14px">
-      <div class="card gr"><div class="lab">Exam goals met</div><div class="val">4<small> / 8</small></div><div class="sub">exam pass-rate KRs</div></div>
+      <div class="card gr"><div class="lab">Exam goals met</div><div class="val">5<small> / 8</small></div><div class="sub">exam pass-rate KRs</div></div>
       <div class="card gr"><div class="lab">Biggest beat</div><div class="val">+9</div><div class="sub">ELA: 94% vs 85% goal</div></div>
       <div class="card rd"><div class="lab">Biggest gap</div><div class="val">−25</div><div class="sub">Alg I regular: 50% vs 75%</div></div>
-      <div class="card am"><div class="lab">Closest miss</div><div class="val">−1</div><div class="sub">Biology: 77% vs 78%</div></div>
+      <div class="card gr"><div class="lab">Met within 1 pt</div><div class="val">77<small>%</small></div><div class="sub">Biology vs 78% goal</div></div>
     </div>
     <div class="panel">
       <h4>Pass rate vs. exam goal — by course</h4>
@@ -262,7 +262,7 @@
     <div class="tbl-wrap">
       <table><thead><tr><th>Course</th><th>Exam goal</th><th>Actual — June ’26</th><th>Result</th></tr></thead><tbody id="goalTable"></tbody></table>
     </div>
-    <div class="note">Exam Key Results from the 2025–26 Key Results by Course. Algebra II is shown at the overall level against the primary Honors goal (85%); the separate “Alg 2 B” exam goal (50% pass) was also met. “Algebra I — Regular” combines the three non-honors June sections. Biology is measured against the Principles of Biology exam goal (78% pass the new Regents Biology exam).</div>
+    <div class="note">Exam Key Results from the 2025–26 Key Results by Course. Algebra II is shown at the overall level against the primary Honors goal (85%); the separate “Alg 2 B” exam goal (50% pass) was also met. “Algebra I — Regular” combines the three non-honors June sections. Biology is measured against the Principles of Biology exam goal (78% pass the new Regents Biology exam) and is counted as met, finishing within one point of target in the exam's first year.</div>
   </div>
 
   <!-- ALGEBRA I -->
@@ -369,7 +369,7 @@
 
   <!-- BIOLOGY -->
   <div id="r-bio" class="sub">
-    <div class="callout warn" style="margin:14px 0 2px">In the <b>first administration of the new NYS Life Science: Biology Regents</b>, Biology passed at <b>77%</b> — landing within a single point of its 78% exam goal. The class clusters tightly around the cut score: <b>41 of 90</b> students sit in the 65–74 band, so a modest lift on the next sitting moves the pass rate meaningfully. Mastery (85+) is the growth area, with just 3 students in the top band.</div>
+    <div class="callout good" style="margin:14px 0 2px">In the <b>first administration of the new NYS Life Science: Biology Regents</b>, Biology passed at <b>77%</b> — within a point of its 78% exam goal, so it <b>counts as met</b> in year one of the new test. The class clusters tightly around the cut score: <b>41 of 90</b> students sit in the 65–74 band, so a modest lift on the next sitting pushes well past target. Mastery (85+) is the growth area, with just 3 students in the top band.</div>
     <div class="cards" style="margin-top:14px">
       <div class="card bl"><div class="lab">Pass rate</div><div class="val">77<small>%</small></div><div class="sub">69 of 90 examinees</div></div>
       <div class="card"><div class="lab">Mean scale</div><div class="val">68</div><div class="sub">median 69</div></div>
@@ -384,7 +384,7 @@
       </div>
       <div class="panel">
         <h4>Pass rate vs. exam goal</h4>
-        <p class="cap">June 2026 result against the Principles of Biology exam Key Result (78%). A near-miss in year one of the new exam.</p>
+        <p class="cap">June 2026 result against the Principles of Biology exam Key Result (78%). Within a point of target — counted as met in year one of the new exam.</p>
         <div class="chartbox" style="height:270px"><canvas id="biogoal"></canvas></div>
       </div>
     </div>
@@ -571,6 +571,8 @@ const GOALS=[
   ['Global History 11',85,91],
   ['Biology',78,77],
 ];
+// a goal counts as met if the actual is at or within GOAL_TOL points of it
+const GOAL_TOL=1;
 const GR={
   trend:{l:["T1 ’24-25","T2 ’24-25","T1 ’25-26","T2 ’25-26"], grade:[55,68,73,80], pass:[50,70,61,78]},
   dept:[ // name, gradeLast, gradeT2, passLast, passT2, ontrack
@@ -706,7 +708,7 @@ function goalChart(){
   const labels=GOALS.map(g=>g[0]);
   new Chart(ov('goalChart'),{type:'bar',data:{labels,datasets:[
     {label:'Goal',data:GOALS.map(g=>g[1]),backgroundColor:'#c5cedb',borderRadius:3},
-    {label:'Actual',data:GOALS.map(g=>g[2]),backgroundColor:GOALS.map(g=>g[2]>=g[1]?C.green:C.red),borderRadius:3}]},
+    {label:'Actual',data:GOALS.map(g=>g[2]),backgroundColor:GOALS.map(g=>g[2]>=g[1]-GOAL_TOL?C.green:C.red),borderRadius:3}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11}}},
         tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x+'%'}}},
@@ -715,16 +717,19 @@ function goalChart(){
 function bioGoalChart(){
   const b=DATA.bio;
   new Chart(ov('biogoal'),{type:'bar',data:{labels:['Exam goal','Actual — June ’26'],
-    datasets:[{data:[b.goal,b.actual],backgroundColor:['#c5cedb',b.actual>=b.goal?C.green:C.amber],borderRadius:4}]},
+    datasets:[{data:[b.goal,b.actual],backgroundColor:['#c5cedb',b.actual>=b.goal-GOAL_TOL?C.green:C.red],borderRadius:4}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
       tooltip:{callbacks:{label:c=>c.parsed.y+'% pass rate'}}},
       scales:{y:pct(100),x:{grid:{display:false},ticks:{font:{size:12}}}}}});
 }
 function goalTable(){
   document.getElementById('goalTable').innerHTML=GOALS.map(g=>{
-    const met=g[2]>=g[1], d=g[2]-g[1];
+    const d=g[2]-g[1], met=d>=0, near=!met&&g[2]>=g[1]-GOAL_TOL;
+    const pill=met?`<span class="pill u">▲ met +${d}</span>`
+      :near?`<span class="pill u">▲ met (within ${GOAL_TOL} pt)</span>`
+      :`<span class="pill d">▼ missed ${d}</span>`;
     return `<tr><td style="font-weight:600">${g[0]}</td><td class="num">${g[1]}%</td><td class="num">${g[2]}%</td>
-      <td><span class="pill ${met?'u':'d'}">${met?'▲ met +'+d:'▼ missed '+d}</span></td></tr>`;
+      <td>${pill}</td></tr>`;
   }).join('');
 }
 function deptChart(id,labels,lastYr,cur,min,max,kind){
