@@ -533,6 +533,7 @@
 
   <div class="subnav">
     <button class="active" onclick="sub('st','dj',this)">December → June</button>
+    <button onclick="sub('st','leaders',this)">Senior Leaders</button>
     <button onclick="sub('st','multi',this)">Multi-year growth</button>
   </div>
 
@@ -574,6 +575,35 @@
     </div>
   </div>
 
+  <!-- SENIOR LEADERS -->
+  <div id="st-leaders" class="sub">
+    <div class="callout good" style="margin:14px 0 2px">Staff confidence in the senior leadership team is <b>high and broadly rising</b>. In June 2026 every senior leader was rated <b>4.44/5 or higher</b>. The strongest gains since December 2024 were confidence in <b>David as Executive Director</b> (+0.27) and <b>Dennis leading Post-Secondary</b> (+0.21); confidence in the Principal, CAO, and Operations leads all sit at or above 4.44.</div>
+    <p class="note" style="margin:14px 0 4px">June 2026 · confidence in each senior leader on a 1–5 scale · 61 respondents · change shown vs December 2025</p>
+    <div class="cards">
+      <div class="card gr"><div class="lab">David · Exec. Director</div><div class="val">4.54<small>/5</small></div><div class="sub"><span class="up">▲ 0.16</span> vs Dec ’25 · 97% fav.</div></div>
+      <div class="card gr"><div class="lab">Iris · Principal</div><div class="val">4.57<small>/5</small></div><div class="sub"><span class="flat">▼ 0.08</span> vs Dec ’25 · 93% fav.</div></div>
+      <div class="card gr"><div class="lab">Roma · Chief Academic Off.</div><div class="val">4.44<small>/5</small></div><div class="sub"><span class="flat">▲ 0.06</span> vs Dec ’25 · 89% fav.</div></div>
+      <div class="card gr"><div class="lab">Dennis · Post-Secondary</div><div class="val">4.44<small>/5</small></div><div class="sub"><span class="up">▲ 0.14</span> vs Dec ’25 · 95% fav.</div></div>
+      <div class="card gr"><div class="lab">Saccora · Operations</div><div class="val">4.52<small>/5</small></div><div class="sub"><span class="flat">▼ 0.05</span> vs Dec ’25 · 95% fav.</div></div>
+    </div>
+    <div class="grid2">
+      <div class="panel">
+        <h4>Confidence by leader — Dec ’24 · Dec ’25 · June ’26</h4>
+        <div class="legend">
+          <span><span class="sw" style="background:#c5cedb"></span>Dec 2024</span>
+          <span><span class="sw" style="background:var(--fall)"></span>Dec 2025</span>
+          <span><span class="sw" style="background:var(--spring)"></span>June 2026</span>
+        </div>
+        <div class="chartbox" style="height:340px"><canvas id="leaderBar"></canvas></div>
+      </div>
+      <div class="panel">
+        <h4>Confidence trend by leader</h4>
+        <p class="cap">Average confidence (1–5) across administrations. Dennis and Saccora joined the survey in December 2024.</p>
+        <div class="chartbox" style="height:340px"><canvas id="leaderTrend"></canvas></div>
+      </div>
+    </div>
+  </div>
+
   <!-- MULTI-YEAR -->
   <div id="st-multi" class="sub">
     <div class="callout good" style="margin:14px 0 2px">Across five administrations the staff experience has <b>climbed steadily</b>. Since December 2023, "recommend CSH as a place of work" rose from 3.5 to <b>4.02</b>, "recommend CSH to students" from 3.8 to <b>4.39</b>, and "feel welcomed" from 3.7 to <b>4.41</b>. Mission clarity has stayed consistently the strongest item, and honesty &amp; transparency — still the lowest — has gained 0.4 points off its 2023 low.</div>
@@ -606,7 +636,7 @@
     Staff experience: CSH Organizational Feedback Surveys — June 2026 (61 respondents) and December 2025 (37 respondents), internal, with prior administrations back to December 2023<br>
     Postsecondary: PSL G12 Milestone Tracker 2025–26 (internal) — reported as de-identified counts; no student-level data is published
   </div>
-  <div class="disc">Regents pass rate = scale score ≥ 65. Algebra I cohort rate combines the January and June administrations (152 students); other figures reflect the June 2026 sitting. Comparison figures for district, state, and peer schools (District 12 / South Bronx, NY State, Bronx Center for Science and Math, Dream Charter) are reproduced from the State of CSH Data Review and reflect the most recent reported year, not necessarily June 2026. All data is school-level and de-identified. Staff survey results reflect 61 respondents in June 2026 and 37 in December 2025; leadership-specific confidence items and open-ended responses are reviewed internally and are not part of this public summary. Postsecondary figures reflect June 2026 matriculation decisions for the 96 graduating seniors (99-senior cohort; 3 repeating senior year) and may shift over the summer; college rankings are US News &amp; World Report 2026 (National Universities and National Liberal Arts Colleges are separate lists). Built for internal review.</div>
+  <div class="disc">Regents pass rate = scale score ≥ 65. Algebra I cohort rate combines the January and June administrations (152 students); other figures reflect the June 2026 sitting. Comparison figures for district, state, and peer schools (District 12 / South Bronx, NY State, Bronx Center for Science and Math, Dream Charter) are reproduced from the State of CSH Data Review and reflect the most recent reported year, not necessarily June 2026. All data is school-level and de-identified. Staff survey results reflect 61 respondents in June 2026 and 37 in December 2025; open-ended staff responses are reviewed internally and are not part of this public summary. Postsecondary figures reflect June 2026 matriculation decisions for the 96 graduating seniors (99-senior cohort; 3 repeating senior year) and may shift over the summer; college rankings are US News &amp; World Report 2026 (National Universities and National Liberal Arts Colleges are separate lists). Built for internal review.</div>
 </footer>
 
 </div>
@@ -687,6 +717,21 @@ const SVO={
     ['Daily actions embody SCORE values',4.15,4.16,4.10,90],
     ['Actively support the mission',4.39,4.30,4.30,87]
   ],
+  // Senior-leader confidence. name, role, June'26, Dec'25, Dec'24, %fav June'26
+  leaders:[
+    ['David','Exec. Director',4.54,4.38,4.27,97],
+    ['Iris','Principal',4.57,4.65,4.40,93],
+    ['Roma','Chief Academic Off.',4.44,4.38,4.50,89],
+    ['Dennis','Post-Secondary',4.44,4.30,4.23,95],
+    ['Saccora','Operations',4.52,4.57,4.50,95]
+  ],
+  leaderTrend:{ l:["Dec ’23","June ’24","Dec ’24","Dec ’25","June ’26"], series:[
+    {name:'David (ED)',v:[4.30,4.30,4.27,4.38,4.54]},
+    {name:'Iris (Principal)',v:[4.30,4.40,4.40,4.65,4.57]},
+    {name:'Roma (CAO)',v:[4.40,4.40,4.50,4.38,4.44]},
+    {name:'Dennis (PSL)',v:[null,null,4.23,4.30,4.44]},
+    {name:'Saccora (Ops)',v:[null,null,4.50,4.57,4.52]}
+  ]},
   // "What anchors you to the community" — count of 61 June respondents (check all that apply)
   anchor:[['Students & relationships',51],['The mission',48],['Salaries & benefits',48],['Personal career goals',31],['Adult relationships & connections',29],['Growth opportunities at CSH',25],['Work culture',22],['The academic program',19]],
   trend:{ l:["Dec ’23","June ’24","Oct ’24","Dec ’24","Dec ’25","June ’26"], series:[
@@ -793,6 +838,9 @@ function build(scope){
   }
   if(scope==='st-dj'){
     staffDJ(); staffMovers(); staffAnchor(); staffTable();
+  }
+  if(scope==='st-leaders'){
+    leaderBar(); leaderTrend();
   }
   if(scope==='st-multi'){
     staffYoY(); staffTrend();
@@ -954,13 +1002,30 @@ function staffTrend(){
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11}}}},
       scales:{y:{min:3.0,max:5.0,grid:{color:C.line}},x:{grid:{display:false}}}}});
 }
+function leaderBar(){
+  const d=SVO.leaders;
+  new Chart(ov('leaderBar'),{type:'bar',data:{labels:d.map(x=>x[0]),datasets:[
+    {label:'Dec 2024',data:d.map(x=>x[4]),backgroundColor:'#c5cedb',borderRadius:3},
+    {label:'Dec 2025',data:d.map(x=>x[3]),backgroundColor:C.fall+'D9',borderRadius:3},
+    {label:'June 2026',data:d.map(x=>x[2]),backgroundColor:C.spring+'D9',borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{title:c=>{const l=SVO.leaders[c[0].dataIndex];return l[0]+' · '+l[1];},label:c=>c.dataset.label+': '+c.parsed.y.toFixed(2)}}},
+      scales:{y:{min:3.5,max:5.0,grid:{color:C.line}},x:{grid:{display:false},ticks:{font:{size:11.5}}}}}});
+}
+function leaderTrend(){
+  const cols=[C.blue,C.green,C.amber,C.accent,C.navy];
+  new Chart(ov('leaderTrend'),{type:'line',data:{labels:SVO.leaderTrend.l,datasets:SVO.leaderTrend.series.map((s,i)=>(
+    {label:s.name,data:s.v,borderColor:cols[i],backgroundColor:cols[i],tension:.3,borderWidth:2.5,pointRadius:3,spanGaps:false}))},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:10.5}}}},
+      scales:{y:{min:4.0,max:5.0,grid:{color:C.line}},x:{grid:{display:false}}}}});
+}
 function staffTable(){
   const d=[...SVO.items].sort((a,b)=>b[1]-a[1]);
   document.getElementById('staffTable').innerHTML=d.map(x=>{
     const ch=+(x[1]-x[2]).toFixed(2);
     const pill=ch>=0.1?`<span class="pill u">▲ +${ch.toFixed(2)}</span>`:ch<=-0.1?`<span class="pill d">▼ ${Math.abs(ch).toFixed(2)}</span>`:'<span class="pill f">~ flat</span>';
     return `<tr><td style="font-weight:500">${x[0]}</td><td class="num" style="color:${C.spring}">${x[1].toFixed(2)}</td>
-      <td class="num" style="color:${C.fall}">${x[2].toFixed(2)}</td><td>${pill}</td><td class="num">${x[3]}%</td></tr>`;
+      <td class="num" style="color:${C.fall}">${x[2].toFixed(2)}</td><td>${pill}</td><td class="num">${x[4]}%</td></tr>`;
   }).join('');
 }
 
