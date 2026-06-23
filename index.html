@@ -529,44 +529,69 @@
 <section id="staff" class="tab">
   <div class="eyebrow">Staff &amp; Organizational Survey</div>
   <h2 class="sec">What Staff Say</h2>
-  <p class="sec-sub">December 2025 · 37 staff respondents · level of agreement on a 1–5 scale, compared with December 2024 and earlier administrations back to December 2023.</p>
+  <p class="sec-sub">The arc of the staff experience: within this school year (December 2025 → June 2026, 61 June respondents) and the longer climb across five administrations back to December 2023. Level of agreement on a 1–5 scale.</p>
 
-  <div class="callout good" style="margin:14px 0 2px">Staff sentiment <b>rose almost across the board</b> versus a year ago. The biggest gains were a stronger sense that CSH is <b>oriented toward staff and student growth</b> (+0.41), confidence in the <b>Culture Team</b> (+0.37), and willingness to <b>recommend CSH to students</b> (+0.35). The strongest items are understanding the mission (4.65/5) and feeling welcomed (4.49/5). The items to keep watching are <b>honesty &amp; transparency</b> (3.73) and recommending CSH as a <b>place to work</b> (3.97).</div>
-
-  <div class="cards">
-    <div class="card bl"><div class="lab">Respondents</div><div class="val">37</div><div class="sub">staff · December 2025</div></div>
-    <div class="card gr"><div class="lab">Feel welcomed</div><div class="val">4.49<small>/5</small></div><div class="sub"><span class="up">▲ 0.19</span> vs Dec ’24 · 97% fav.</div></div>
-    <div class="card gr"><div class="lab">Recommend to students</div><div class="val">4.35<small>/5</small></div><div class="sub"><span class="up">▲ 0.35</span> vs Dec ’24</div></div>
-    <div class="card am"><div class="lab">Honest &amp; transparent</div><div class="val">3.73<small>/5</small></div><div class="sub"><span class="flat">▲ 0.03</span> vs Dec ’24 · watch</div></div>
+  <div class="subnav">
+    <button class="active" onclick="sub('st','dj',this)">December → June</button>
+    <button onclick="sub('st','multi',this)">Multi-year growth</button>
   </div>
 
-  <div class="panel">
-    <h4>Agreement by item — December 2024 vs December 2025</h4>
-    <div class="legend">
-      <span><span class="sw" style="background:var(--fall)"></span>December 2024</span>
-      <span><span class="sw" style="background:var(--spring)"></span>December 2025</span>
-    </div>
-    <div class="chartbox" style="height:560px"><canvas id="staffCmp"></canvas></div>
-  </div>
-
-  <div class="grid2">
-    <div class="panel">
-      <h4>Biggest movers vs Dec ’24</h4>
-      <p class="cap">Change in average agreement (1–5) since December 2024. Green up, red down.</p>
-      <div class="chartbox" style="height:520px"><canvas id="staffMovers"></canvas></div>
+  <!-- DECEMBER -> JUNE -->
+  <div id="st-dj" class="sub active">
+    <div class="callout good" style="margin:14px 0 2px">Staff sentiment held strong and edged up over the year. The overall school-year rating climbed to <b>3.95/5</b> from 3.59 in December. The biggest within-year gains were <b>understanding the mission</b> (+0.14), <b>pride in the work</b> (+0.11), and <b>knowing what's expected</b> (+0.09). The item to watch is whether <b>staff voices are heard</b> (−0.14), and honesty &amp; transparency (3.79) remains the lowest-rated item even after a small gain.</div>
+    <p class="note" style="margin:14px 0 4px">December 2025 → June 2026 · average agreement on a 1–5 scale · 61 June respondents</p>
+    <div class="cards">
+      <div class="card gr"><div class="lab">Overall school-year rating</div><div class="val">3.95<small>/5</small></div><div class="sub"><span class="up">▲ 0.36</span> vs Dec ’25</div></div>
+      <div class="card gr"><div class="lab">Understand the mission</div><div class="val">4.79<small>/5</small></div><div class="sub"><span class="up">▲ 0.14</span> · 98% fav.</div></div>
+      <div class="card gr"><div class="lab">Proud of my work</div><div class="val">4.52<small>/5</small></div><div class="sub"><span class="up">▲ 0.11</span> · 98% fav.</div></div>
+      <div class="card am"><div class="lab">Honest &amp; transparent</div><div class="val">3.79<small>/5</small></div><div class="sub"><span class="flat">▲ 0.06</span> · lowest item</div></div>
     </div>
     <div class="panel">
-      <h4>Multi-year trend</h4>
-      <p class="cap">Average agreement (1–5) across the last five administrations.</p>
-      <div class="chartbox" style="height:300px"><canvas id="staffTrend"></canvas></div>
+      <h4>Agreement by item — December 2025 vs June 2026</h4>
+      <div class="legend">
+        <span><span class="sw" style="background:var(--fall)"></span>December 2025</span>
+        <span><span class="sw" style="background:var(--spring)"></span>June 2026</span>
+      </div>
+      <div class="chartbox" style="height:560px"><canvas id="staffDJ"></canvas></div>
+    </div>
+    <div class="grid2">
+      <div class="panel">
+        <h4>Biggest movers — Dec ’25 → June ’26</h4>
+        <p class="cap">Change in average agreement (1–5) since December 2025. Green up, red down.</p>
+        <div class="chartbox" style="height:520px"><canvas id="staffMovers"></canvas></div>
+      </div>
+      <div class="panel">
+        <h4>Where staff find their anchor</h4>
+        <p class="cap">"The following aspects of CSH anchor me to the community" — share of 61 respondents selecting each (check all that apply).</p>
+        <div class="chartbox" style="height:520px"><canvas id="staffAnchor"></canvas></div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Item</th><th>June ’26</th><th>Dec ’25</th><th>Change</th><th>% fav.</th></tr></thead>
+        <tbody id="staffTable"></tbody>
+      </table>
     </div>
   </div>
 
-  <div class="tbl-wrap">
-    <table>
-      <thead><tr><th>Item</th><th>Dec ’25</th><th>Dec ’24</th><th>Change</th><th>% fav.</th></tr></thead>
-      <tbody id="staffTable"></tbody>
-    </table>
+  <!-- MULTI-YEAR -->
+  <div id="st-multi" class="sub">
+    <div class="callout good" style="margin:14px 0 2px">Across five administrations the staff experience has <b>climbed steadily</b>. Since December 2023, "recommend CSH as a place of work" rose from 3.5 to <b>4.02</b>, "recommend CSH to students" from 3.8 to <b>4.39</b>, and "feel welcomed" from 3.7 to <b>4.41</b>. Mission clarity has stayed consistently the strongest item, and honesty &amp; transparency — still the lowest — has gained 0.4 points off its 2023 low.</div>
+    <p class="note" style="margin:14px 0 4px">December 2024 → December 2025 → June 2026 · average agreement on a 1–5 scale</p>
+    <div class="panel">
+      <h4>Year-over-year by item — Dec ’24 · Dec ’25 · June ’26</h4>
+      <div class="legend">
+        <span><span class="sw" style="background:#c5cedb"></span>Dec 2024</span>
+        <span><span class="sw" style="background:var(--fall)"></span>Dec 2025</span>
+        <span><span class="sw" style="background:var(--spring)"></span>June 2026</span>
+      </div>
+      <div class="chartbox" style="height:600px"><canvas id="staffYoY"></canvas></div>
+    </div>
+    <div class="panel">
+      <h4>Multi-year trend — selected items</h4>
+      <p class="cap">Average agreement (1–5) across the last five administrations, Dec ’23 → June ’26.</p>
+      <div class="chartbox" style="height:340px"><canvas id="staffTrend"></canvas></div>
+    </div>
   </div>
 </section>
 
@@ -578,10 +603,10 @@
     Course grades: Comp Sci High T2 ’25–26 Data Review and 2025–26 Key Results by Course (internal).<br>
     Peer / state / district comparisons: State of CSH Data Review — End of Trimester One Edition (Dec 4, 2025)<br>
     Student experience: CSH Student Experience Surveys — Fall 2024, Fall 2025, Spring 2026 (internal)<br>
-    Staff experience: CSH Organizational Feedback Survey — December 2025 (internal), with prior administrations back to December 2023<br>
+    Staff experience: CSH Organizational Feedback Surveys — June 2026 (61 respondents) and December 2025 (37 respondents), internal, with prior administrations back to December 2023<br>
     Postsecondary: PSL G12 Milestone Tracker 2025–26 (internal) — reported as de-identified counts; no student-level data is published
   </div>
-  <div class="disc">Regents pass rate = scale score ≥ 65. Algebra I cohort rate combines the January and June administrations (152 students); other figures reflect the June 2026 sitting. Comparison figures for district, state, and peer schools (District 12 / South Bronx, NY State, Bronx Center for Science and Math, Dream Charter) are reproduced from the State of CSH Data Review and reflect the most recent reported year, not necessarily June 2026. All data is school-level and de-identified. Staff survey results reflect 37 respondents in December 2025; leadership-specific confidence items and open-ended responses are reviewed internally and are not part of this public summary. Postsecondary figures reflect June 2026 matriculation decisions for the 96 graduating seniors (99-senior cohort; 3 repeating senior year) and may shift over the summer; college rankings are US News &amp; World Report 2026 (National Universities and National Liberal Arts Colleges are separate lists). Built for internal review.</div>
+  <div class="disc">Regents pass rate = scale score ≥ 65. Algebra I cohort rate combines the January and June administrations (152 students); other figures reflect the June 2026 sitting. Comparison figures for district, state, and peer schools (District 12 / South Bronx, NY State, Bronx Center for Science and Math, Dream Charter) are reproduced from the State of CSH Data Review and reflect the most recent reported year, not necessarily June 2026. All data is school-level and de-identified. Staff survey results reflect 61 respondents in June 2026 and 37 in December 2025; leadership-specific confidence items and open-ended responses are reviewed internally and are not part of this public summary. Postsecondary figures reflect June 2026 matriculation decisions for the 96 graduating seniors (99-senior cohort; 3 repeating senior year) and may shift over the summer; college rankings are US News &amp; World Report 2026 (National Universities and National Liberal Arts Colleges are separate lists). Built for internal review.</div>
 </footer>
 
 </div>
@@ -640,32 +665,35 @@ const SV={
   grade:{l:['9th','10th','11th','12th'],f:[4.08,4.06,4.00,3.98],s:[4.07,3.95,3.94,3.93]},
   adv:[['Ortiz/Reardon','12',6,4.73,4.20],['Clark/Carapezza','9',24,4.51,4.19],['Diverio/Mao','12',7,4.41,4.14],['Thevenin/S. Joseph','9',21,4.33,4.30],['Agrawal/M. Joseph','10',18,4.28,4.08],['Rodriguez/Phillips','9',22,4.27,4.38],['Germain/Sturdy','10',19,4.26,4.11],['Peters/Yuen/L. Ortiz','9',19,4.18,4.06],['Golden','12',24,4.17,null],['Chambers/Medina','11',17,4.14,4.00],['Magaldi/Ryan','12',8,4.08,3.80],['Rahaman/Yang/Haught','9',16,4.06,4.00],['Berrios/Romero','10',21,4.03,null],['Helmer/Gouede','10',19,3.99,4.25],['Skwiersky/Stewart','11',8,3.98,4.00],['Gonzalez/Kelly','11',14,3.92,4.30],['Dolmo/Uddin/Guity','10/11',10,3.91,3.13],['Enriquez/Mosley','10',15,3.91,4.08],['Metchiou/Bute','10/11',17,3.88,3.41],['Bendau/Parcells/Losi','12',12,3.79,4.43]]
 };
-// Staff / organizational survey (Dec 2025, N=37). label, mean Dec'25, mean Dec'24, % favorable (agree+strongly agree)
+// Staff / organizational survey. June 2026 N=61, Dec 2025 N=37.
+// label, June'26 mean, Dec'25 mean, Dec'24 mean, % favorable (agree+strongly agree) June'26
 const SVO={
-  n:37,
+  nJun:61, nDec:37,
   items:[
-    ['Feel welcomed at CSH',4.49,4.30,97],
-    ['Understand the mission',4.65,4.70,100],
-    ['Capable of advancing the mission',4.24,4.20,84],
-    ['Oriented to staff & student growth',4.11,3.70,84],
-    ['Operations team customer service',4.41,4.30,92],
-    ['Culture team supports learning',4.27,3.90,86],
-    ['Proud of the work I do',4.41,4.40,95],
-    ['Recommend CSH as a workplace',3.97,3.80,73],
-    ['Recommend CSH to students',4.35,4.00,92],
-    ['Values aligned with CSH',4.32,4.10,97],
-    ['Know what is expected of me',4.24,4.20,84],
-    ['Staff voices are heard',4.03,3.90,78],
-    ['Honest & transparent with staff',3.73,3.70,70],
-    ['Grown as a professional',4.35,4.30,86],
-    ['Daily actions embody SCORE values',4.16,4.10,89],
-    ['Actively support the mission',4.30,4.30,89]
+    ['Feel welcomed at CSH',4.41,4.49,4.30,92],
+    ['Understand the mission',4.79,4.65,4.70,98],
+    ['Capable of advancing the mission',4.30,4.24,4.20,93],
+    ['Oriented to staff & student growth',4.16,4.11,3.70,92],
+    ['Operations team customer service',4.36,4.41,4.30,89],
+    ['Culture team supports learning',4.30,4.27,3.90,87],
+    ['Proud of the work I do',4.52,4.41,4.40,98],
+    ['Recommend CSH as a workplace',4.02,3.97,3.80,79],
+    ['Recommend CSH to students',4.39,4.35,4.00,93],
+    ['Values aligned with CSH',4.25,4.32,4.10,90],
+    ['Know what is expected of me',4.33,4.24,4.20,93],
+    ['Staff voices are heard',3.89,4.03,3.90,70],
+    ['Honest & transparent with staff',3.79,3.73,3.70,61],
+    ['Grown as a professional',4.39,4.35,4.30,90],
+    ['Daily actions embody SCORE values',4.15,4.16,4.10,90],
+    ['Actively support the mission',4.39,4.30,4.30,87]
   ],
-  trend:{ l:["Dec ’23","June ’24","Oct ’24","Dec ’24","Dec ’25"], series:[
-    {name:'Understand the mission',v:[4.5,4.5,4.8,4.7,4.65]},
-    {name:'Feel welcomed',v:[3.7,3.8,4.3,4.3,4.49]},
-    {name:'Recommend as workplace',v:[3.5,3.7,3.7,3.8,3.97]},
-    {name:'Honest & transparent',v:[3.4,3.3,3.6,3.7,3.73]}
+  // "What anchors you to the community" — count of 61 June respondents (check all that apply)
+  anchor:[['Students & relationships',51],['The mission',48],['Salaries & benefits',48],['Personal career goals',31],['Adult relationships & connections',29],['Growth opportunities at CSH',25],['Work culture',22],['The academic program',19]],
+  trend:{ l:["Dec ’23","June ’24","Oct ’24","Dec ’24","Dec ’25","June ’26"], series:[
+    {name:'Understand the mission',v:[4.5,4.5,4.8,4.7,4.65,4.79]},
+    {name:'Feel welcomed',v:[3.7,3.8,4.3,4.3,4.49,4.41]},
+    {name:'Recommend as workplace',v:[3.5,3.7,3.7,3.8,3.97,4.02]},
+    {name:'Honest & transparent',v:[3.4,3.3,3.6,3.7,3.73,3.79]}
   ]}
 };
 
@@ -763,8 +791,11 @@ function build(scope){
     cmpChart('yrGrade',SV.grade.l,SV.grade.f,SV.grade.s,3.5,4.5,false);
     advMini(); advTable();
   }
-  if(scope==='staff'){
-    staffCmp(); staffMovers(); staffTrend(); staffTable();
+  if(scope==='st-dj'){
+    staffDJ(); staffMovers(); staffAnchor(); staffTable();
+  }
+  if(scope==='st-multi'){
+    staffYoY(); staffTrend();
   }
 }
 function ov(id){return document.getElementById(id);}
@@ -879,11 +910,12 @@ function advTable(){
 }
 
 /* ---------- staff survey ---------- */
-function staffCmp(){
+// items: [label, June'26, Dec'25, Dec'24, %favJune]
+function staffDJ(){
   const d=[...SVO.items].sort((a,b)=>b[1]-a[1]);
-  new Chart(ov('staffCmp'),{type:'bar',data:{labels:d.map(x=>x[0]),datasets:[
-    {label:'Dec 2024',data:d.map(x=>x[2]),backgroundColor:C.fall+'D9',borderRadius:3},
-    {label:'Dec 2025',data:d.map(x=>x[1]),backgroundColor:C.spring+'D9',borderRadius:3}]},
+  new Chart(ov('staffDJ'),{type:'bar',data:{labels:d.map(x=>x[0]),datasets:[
+    {label:'Dec 2025',data:d.map(x=>x[2]),backgroundColor:C.fall+'D9',borderRadius:3},
+    {label:'June 2026',data:d.map(x=>x[1]),backgroundColor:C.spring+'D9',borderRadius:3}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x.toFixed(2)}}},
       scales:{x:{min:3.0,max:5.0,grid:{color:C.line}},y:{grid:{display:false},ticks:{font:{size:10.5}}}}}});
@@ -893,9 +925,27 @@ function staffMovers(){
   new Chart(ov('staffMovers'),{type:'bar',data:{labels:d.map(x=>x[0]),datasets:[{data:d.map(x=>x[1]),
     backgroundColor:d.map(x=>x[1]>=0?C.green+'D9':C.red+'D9'),borderRadius:3}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
-      tooltip:{callbacks:{label:c=>(c.parsed.x>=0?'+':'')+c.parsed.x.toFixed(2)+' vs Dec ’24'}}},
-      scales:{x:{suggestedMin:-0.2,suggestedMax:0.5,grid:{color:C.line},ticks:{callback:v=>(v>0?'+':'')+v}},
+      tooltip:{callbacks:{label:c=>(c.parsed.x>=0?'+':'')+c.parsed.x.toFixed(2)+' vs Dec ’25'}}},
+      scales:{x:{suggestedMin:-0.2,suggestedMax:0.2,grid:{color:C.line},ticks:{callback:v=>(v>0?'+':'')+v}},
         y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+}
+function staffAnchor(){
+  const d=[...SVO.anchor].sort((a,b)=>b[1]-a[1]);
+  new Chart(ov('staffAnchor'),{type:'bar',data:{labels:d.map(x=>x[0]),datasets:[{data:d.map(x=>x[1]),
+    backgroundColor:d.map((x,i)=>i===0?C.blue:'#7d93b0'),borderRadius:4}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>c.parsed.x+' of '+SVO.nJun+' ('+Math.round(c.parsed.x/SVO.nJun*100)+'%)'}}},
+      scales:{x:{beginAtZero:true,max:61,grid:{color:C.line},ticks:{precision:0}},y:{grid:{display:false},ticks:{font:{size:10.5}}}}}});
+}
+function staffYoY(){
+  const d=[...SVO.items].sort((a,b)=>b[1]-a[1]);
+  new Chart(ov('staffYoY'),{type:'bar',data:{labels:d.map(x=>x[0]),datasets:[
+    {label:'Dec 2024',data:d.map(x=>x[3]),backgroundColor:'#c5cedb',borderRadius:3},
+    {label:'Dec 2025',data:d.map(x=>x[2]),backgroundColor:C.fall+'D9',borderRadius:3},
+    {label:'June 2026',data:d.map(x=>x[1]),backgroundColor:C.spring+'D9',borderRadius:3}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x.toFixed(2)}}},
+      scales:{x:{min:3.0,max:5.0,grid:{color:C.line}},y:{grid:{display:false},ticks:{font:{size:10.5}}}}}});
 }
 function staffTrend(){
   const cols=[C.blue,C.green,C.amber,C.accent];
@@ -926,7 +976,7 @@ function tab(id,btn){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function sub(group,id,btn){
-  const full=(group==='r'?'r-':'s-')+id;
+  const full=group+'-'+id;
   const container=btn.closest('section');
   container.querySelectorAll('.subnav button').forEach(b=>b.classList.remove('active'));
   container.querySelectorAll('.sub').forEach(s=>s.classList.remove('active'));
