@@ -144,6 +144,7 @@
     <button onclick="tab('regents',this)">Regents Exams</button>
     <button onclick="tab('grades',this)">Grades by Department</button>
     <button onclick="tab('survey',this)">Student Experience</button>
+    <button onclick="tab('staff',this)">Staff Experience</button>
     <button onclick="tab('postsec',this)">Postsecondary</button>
   </div>
 </div>
@@ -524,6 +525,51 @@
   </div>
 </section>
 
+<!-- ============ STAFF EXPERIENCE ============ -->
+<section id="staff" class="tab">
+  <div class="eyebrow">Staff &amp; Organizational Survey</div>
+  <h2 class="sec">What Staff Say</h2>
+  <p class="sec-sub">December 2025 · 37 staff respondents · level of agreement on a 1–5 scale, compared with December 2024 and earlier administrations back to December 2023.</p>
+
+  <div class="callout good" style="margin:14px 0 2px">Staff sentiment <b>rose almost across the board</b> versus a year ago. The biggest gains were a stronger sense that CSH is <b>oriented toward staff and student growth</b> (+0.41), confidence in the <b>Culture Team</b> (+0.37), and willingness to <b>recommend CSH to students</b> (+0.35). The strongest items are understanding the mission (4.65/5) and feeling welcomed (4.49/5). The items to keep watching are <b>honesty &amp; transparency</b> (3.73) and recommending CSH as a <b>place to work</b> (3.97).</div>
+
+  <div class="cards">
+    <div class="card bl"><div class="lab">Respondents</div><div class="val">37</div><div class="sub">staff · December 2025</div></div>
+    <div class="card gr"><div class="lab">Feel welcomed</div><div class="val">4.49<small>/5</small></div><div class="sub"><span class="up">▲ 0.19</span> vs Dec ’24 · 97% fav.</div></div>
+    <div class="card gr"><div class="lab">Recommend to students</div><div class="val">4.35<small>/5</small></div><div class="sub"><span class="up">▲ 0.35</span> vs Dec ’24</div></div>
+    <div class="card am"><div class="lab">Honest &amp; transparent</div><div class="val">3.73<small>/5</small></div><div class="sub"><span class="flat">▲ 0.03</span> vs Dec ’24 · watch</div></div>
+  </div>
+
+  <div class="panel">
+    <h4>Agreement by item — December 2024 vs December 2025</h4>
+    <div class="legend">
+      <span><span class="sw" style="background:var(--fall)"></span>December 2024</span>
+      <span><span class="sw" style="background:var(--spring)"></span>December 2025</span>
+    </div>
+    <div class="chartbox" style="height:560px"><canvas id="staffCmp"></canvas></div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h4>Biggest movers vs Dec ’24</h4>
+      <p class="cap">Change in average agreement (1–5) since December 2024. Green up, red down.</p>
+      <div class="chartbox" style="height:520px"><canvas id="staffMovers"></canvas></div>
+    </div>
+    <div class="panel">
+      <h4>Multi-year trend</h4>
+      <p class="cap">Average agreement (1–5) across the last five administrations.</p>
+      <div class="chartbox" style="height:300px"><canvas id="staffTrend"></canvas></div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Item</th><th>Dec ’25</th><th>Dec ’24</th><th>Change</th><th>% fav.</th></tr></thead>
+      <tbody id="staffTable"></tbody>
+    </table>
+  </div>
+</section>
+
 <!-- ============ FOOTER / REFERENCES ============ -->
 <footer>
   <div class="eyebrow">Sources &amp; references</div>
@@ -532,9 +578,10 @@
     Course grades: Comp Sci High T2 ’25–26 Data Review and 2025–26 Key Results by Course (internal).<br>
     Peer / state / district comparisons: State of CSH Data Review — End of Trimester One Edition (Dec 4, 2025)<br>
     Student experience: CSH Student Experience Surveys — Fall 2024, Fall 2025, Spring 2026 (internal)<br>
+    Staff experience: CSH Organizational Feedback Survey — December 2025 (internal), with prior administrations back to December 2023<br>
     Postsecondary: PSL G12 Milestone Tracker 2025–26 (internal) — reported as de-identified counts; no student-level data is published
   </div>
-  <div class="disc">Regents pass rate = scale score ≥ 65. Algebra I cohort rate combines the January and June administrations (152 students); other figures reflect the June 2026 sitting. Comparison figures for district, state, and peer schools (District 12 / South Bronx, NY State, Bronx Center for Science and Math, Dream Charter) are reproduced from the State of CSH Data Review and reflect the most recent reported year, not necessarily June 2026. All data is school-level and de-identified. Postsecondary figures reflect June 2026 matriculation decisions for the 96 graduating seniors (99-senior cohort; 3 repeating senior year) and may shift over the summer; college rankings are US News &amp; World Report 2026 (National Universities and National Liberal Arts Colleges are separate lists). Built for internal review.</div>
+  <div class="disc">Regents pass rate = scale score ≥ 65. Algebra I cohort rate combines the January and June administrations (152 students); other figures reflect the June 2026 sitting. Comparison figures for district, state, and peer schools (District 12 / South Bronx, NY State, Bronx Center for Science and Math, Dream Charter) are reproduced from the State of CSH Data Review and reflect the most recent reported year, not necessarily June 2026. All data is school-level and de-identified. Staff survey results reflect 37 respondents in December 2025; leadership-specific confidence items and open-ended responses are reviewed internally and are not part of this public summary. Postsecondary figures reflect June 2026 matriculation decisions for the 96 graduating seniors (99-senior cohort; 3 repeating senior year) and may shift over the summer; college rankings are US News &amp; World Report 2026 (National Universities and National Liberal Arts Colleges are separate lists). Built for internal review.</div>
 </footer>
 
 </div>
@@ -592,6 +639,34 @@ const SV={
   movers:[['Adults care about me',0.47],['Student ownership',0.34],['Overall value of advisory',0.19],['Enjoy class experience',0.17],['Advisor accountability',0.10],['Teacher support',0.04],['Appropriate challenge',0.02],['Treated fairly (office)',-0.02],['Teachers excited to teach',-0.02],['Comfort with advisor',-0.04],['Peer respect',-0.06],['Feel like I belong',-0.12],['Staff addresses safety',-0.15],['Belonging in advisory',-0.17],['Positive school energy',-0.17],['Main office respectful',-0.21],['Teachers treat with respect',-0.22],['Emotionally safe',-0.20],['Main office helpful',-0.29],['Safe commuting',-0.40],['Safe in building',-0.35],['Motivated to do well',-0.54]],
   grade:{l:['9th','10th','11th','12th'],f:[4.08,4.06,4.00,3.98],s:[4.07,3.95,3.94,3.93]},
   adv:[['Ortiz/Reardon','12',6,4.73,4.20],['Clark/Carapezza','9',24,4.51,4.19],['Diverio/Mao','12',7,4.41,4.14],['Thevenin/S. Joseph','9',21,4.33,4.30],['Agrawal/M. Joseph','10',18,4.28,4.08],['Rodriguez/Phillips','9',22,4.27,4.38],['Germain/Sturdy','10',19,4.26,4.11],['Peters/Yuen/L. Ortiz','9',19,4.18,4.06],['Golden','12',24,4.17,null],['Chambers/Medina','11',17,4.14,4.00],['Magaldi/Ryan','12',8,4.08,3.80],['Rahaman/Yang/Haught','9',16,4.06,4.00],['Berrios/Romero','10',21,4.03,null],['Helmer/Gouede','10',19,3.99,4.25],['Skwiersky/Stewart','11',8,3.98,4.00],['Gonzalez/Kelly','11',14,3.92,4.30],['Dolmo/Uddin/Guity','10/11',10,3.91,3.13],['Enriquez/Mosley','10',15,3.91,4.08],['Metchiou/Bute','10/11',17,3.88,3.41],['Bendau/Parcells/Losi','12',12,3.79,4.43]]
+};
+// Staff / organizational survey (Dec 2025, N=37). label, mean Dec'25, mean Dec'24, % favorable (agree+strongly agree)
+const SVO={
+  n:37,
+  items:[
+    ['Feel welcomed at CSH',4.49,4.30,97],
+    ['Understand the mission',4.65,4.70,100],
+    ['Capable of advancing the mission',4.24,4.20,84],
+    ['Oriented to staff & student growth',4.11,3.70,84],
+    ['Operations team customer service',4.41,4.30,92],
+    ['Culture team supports learning',4.27,3.90,86],
+    ['Proud of the work I do',4.41,4.40,95],
+    ['Recommend CSH as a workplace',3.97,3.80,73],
+    ['Recommend CSH to students',4.35,4.00,92],
+    ['Values aligned with CSH',4.32,4.10,97],
+    ['Know what is expected of me',4.24,4.20,84],
+    ['Staff voices are heard',4.03,3.90,78],
+    ['Honest & transparent with staff',3.73,3.70,70],
+    ['Grown as a professional',4.35,4.30,86],
+    ['Daily actions embody SCORE values',4.16,4.10,89],
+    ['Actively support the mission',4.30,4.30,89]
+  ],
+  trend:{ l:["Dec ’23","June ’24","Oct ’24","Dec ’24","Dec ’25"], series:[
+    {name:'Understand the mission',v:[4.5,4.5,4.8,4.7,4.65]},
+    {name:'Feel welcomed',v:[3.7,3.8,4.3,4.3,4.49]},
+    {name:'Recommend as workplace',v:[3.5,3.7,3.7,3.8,3.97]},
+    {name:'Honest & transparent',v:[3.4,3.3,3.6,3.7,3.73]}
+  ]}
 };
 
 /* ---------- chart helpers ---------- */
@@ -687,6 +762,9 @@ function build(scope){
     moversChart();
     cmpChart('yrGrade',SV.grade.l,SV.grade.f,SV.grade.s,3.5,4.5,false);
     advMini(); advTable();
+  }
+  if(scope==='staff'){
+    staffCmp(); staffMovers(); staffTrend(); staffTable();
   }
 }
 function ov(id){return document.getElementById(id);}
@@ -797,6 +875,42 @@ function advTable(){
     return `<tr><td style="font-weight:500">${a[0]}</td><td style="color:#9aa3b0">${a[1]}</td><td style="color:#9aa3b0">${a[2]}</td>
       <td class="num" style="color:${C.spring}">${a[3].toFixed(2)}</td>
       <td class="num" style="color:${C.fall}">${a[4]!=null?a[4].toFixed(2):'—'}</td><td>${pill}</td></tr>`;
+  }).join('');
+}
+
+/* ---------- staff survey ---------- */
+function staffCmp(){
+  const d=[...SVO.items].sort((a,b)=>b[1]-a[1]);
+  new Chart(ov('staffCmp'),{type:'bar',data:{labels:d.map(x=>x[0]),datasets:[
+    {label:'Dec 2024',data:d.map(x=>x[2]),backgroundColor:C.fall+'D9',borderRadius:3},
+    {label:'Dec 2025',data:d.map(x=>x[1]),backgroundColor:C.spring+'D9',borderRadius:3}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x.toFixed(2)}}},
+      scales:{x:{min:3.0,max:5.0,grid:{color:C.line}},y:{grid:{display:false},ticks:{font:{size:10.5}}}}}});
+}
+function staffMovers(){
+  const d=SVO.items.map(x=>[x[0],+(x[1]-x[2]).toFixed(2)]).sort((a,b)=>b[1]-a[1]);
+  new Chart(ov('staffMovers'),{type:'bar',data:{labels:d.map(x=>x[0]),datasets:[{data:d.map(x=>x[1]),
+    backgroundColor:d.map(x=>x[1]>=0?C.green+'D9':C.red+'D9'),borderRadius:3}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>(c.parsed.x>=0?'+':'')+c.parsed.x.toFixed(2)+' vs Dec ’24'}}},
+      scales:{x:{suggestedMin:-0.2,suggestedMax:0.5,grid:{color:C.line},ticks:{callback:v=>(v>0?'+':'')+v}},
+        y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+}
+function staffTrend(){
+  const cols=[C.blue,C.green,C.amber,C.accent];
+  new Chart(ov('staffTrend'),{type:'line',data:{labels:SVO.trend.l,datasets:SVO.trend.series.map((s,i)=>(
+    {label:s.name,data:s.v,borderColor:cols[i],backgroundColor:cols[i],tension:.3,borderWidth:2.5,pointRadius:3}))},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11}}}},
+      scales:{y:{min:3.0,max:5.0,grid:{color:C.line}},x:{grid:{display:false}}}}});
+}
+function staffTable(){
+  const d=[...SVO.items].sort((a,b)=>b[1]-a[1]);
+  document.getElementById('staffTable').innerHTML=d.map(x=>{
+    const ch=+(x[1]-x[2]).toFixed(2);
+    const pill=ch>=0.1?`<span class="pill u">▲ +${ch.toFixed(2)}</span>`:ch<=-0.1?`<span class="pill d">▼ ${Math.abs(ch).toFixed(2)}</span>`:'<span class="pill f">~ flat</span>';
+    return `<tr><td style="font-weight:500">${x[0]}</td><td class="num" style="color:${C.spring}">${x[1].toFixed(2)}</td>
+      <td class="num" style="color:${C.fall}">${x[2].toFixed(2)}</td><td>${pill}</td><td class="num">${x[3]}%</td></tr>`;
   }).join('');
 }
 
