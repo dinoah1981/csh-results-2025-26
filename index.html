@@ -86,6 +86,7 @@
   td.num{font-variant-numeric:tabular-nums;font-weight:600;}
   .pill{font-size:10.5px;padding:2px 8px;border-radius:20px;font-weight:700;white-space:nowrap;}
   .pill.u{background:#e2f4ec;color:#0F6E56;} .pill.d{background:#faeae6;color:#9b3a1d;} .pill.f{background:#eef0f2;color:#7a828e;}
+  .pill.am{background:#fcefd9;color:#8a5a06;}
 
   .callout{border-radius:10px;padding:13px 15px;font-size:13px;margin-top:16px;line-height:1.5;}
   .callout.good{background:#e9f6f0;border:1px solid #c8ebdc;color:#0d5e49;}
@@ -729,8 +730,16 @@ const GOALS=[
   ['Physics (Honors)',85,97],
   ['Chemistry',80,62],
 ];
-// a goal counts as met if the actual is at or within GOAL_TOL points of it
-const GOAL_TOL=1;
+// Four-tier status from the point gap (actual − goal):
+//   > +3 exceeded · −3 to +3 met · −3.1 to −10 approaching · < −10 did not meet.
+// "Met" on the scorecard counts exceeded + met (gap ≥ −3).
+function goalStatus(actual,goal){
+  const d=actual-goal, s=(d>=0?'+':'')+d;
+  if(d>3)   return {tier:'Exceeded',     color:C.green, pill:'u',  text:`▲ exceeded ${s}`};
+  if(d>=-3) return {tier:'Met',          color:C.green, pill:'u',  text:`✓ met ${s}`};
+  if(d>=-10)return {tier:'Approaching',  color:C.amber, pill:'am', text:`→ approaching ${s}`};
+  return            {tier:'Did not meet', color:C.red,   pill:'d',  text:`▼ did not meet ${s}`};
+}
 const GR={
   trend:{l:["T1 ’24-25","T2 ’24-25","T1 ’25-26","T2 ’25-26","Final ’25-26"], grade:[55,68,73,80,91], pass:[50,70,61,78,91]},
   dept:[ // name, gradeLast, gradeFinal, passLast, passFinal, gradeMet, passMet
@@ -929,7 +938,7 @@ function goalChart(){
   const labels=GOALS.map(g=>g[0]);
   new Chart(ov('goalChart'),{type:'bar',data:{labels,datasets:[
     {label:'Goal',data:GOALS.map(g=>g[1]),backgroundColor:'#c5cedb',borderRadius:3},
-    {label:'Actual',data:GOALS.map(g=>g[2]),backgroundColor:GOALS.map(g=>g[2]>=g[1]-GOAL_TOL?C.green:C.red),borderRadius:3}]},
+    {label:'Actual',data:GOALS.map(g=>g[2]),backgroundColor:GOALS.map(g=>goalStatus(g[2],g[1]).color),borderRadius:3}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11}}},
         tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x+'%'}}},
@@ -938,17 +947,15 @@ function goalChart(){
 function bioGoalChart(){ examGoal('biogoal',DATA.bio); }
 function examGoal(id,b){
   new Chart(ov(id),{type:'bar',data:{labels:['Exam goal','Actual — June ’26'],
-    datasets:[{data:[b.goal,b.actual],backgroundColor:['#c5cedb',b.actual>=b.goal-GOAL_TOL?C.green:C.red],borderRadius:4}]},
+    datasets:[{data:[b.goal,b.actual],backgroundColor:['#c5cedb',goalStatus(b.actual,b.goal).color],borderRadius:4}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
       tooltip:{callbacks:{label:c=>c.parsed.y+'% pass rate'}}},
       scales:{y:pct(100,40),x:{grid:{display:false},ticks:{font:{size:12}}}}}});
 }
 function goalTable(){
   document.getElementById('goalTable').innerHTML=GOALS.map(g=>{
-    const d=g[2]-g[1], met=d>=0, near=!met&&g[2]>=g[1]-GOAL_TOL;
-    const pill=met?`<span class="pill u">▲ met +${d}</span>`
-      :near?`<span class="pill u">▲ met (within ${GOAL_TOL} pt)</span>`
-      :`<span class="pill d">▼ missed ${d}</span>`;
+    const st=goalStatus(g[2],g[1]);
+    const pill=`<span class="pill ${st.pill}">${st.text}</span>`;
     return `<tr><td style="font-weight:600">${g[0]}</td><td class="num">${g[1]}%</td><td class="num">${g[2]}%</td>
       <td>${pill}</td></tr>`;
   }).join('');
