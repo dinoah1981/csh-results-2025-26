@@ -736,7 +736,7 @@ const GOALS=[
 // "Met" on the scorecard counts exceeded + met (gap ≥ −3).
 function goalStatus(actual,goal){
   const d=actual-goal, s=(d>=0?'+':'')+d;
-  if(d>3)   return {tier:'Exceeded',     color:C.green, pill:'bl', text:`▲ exceeded ${s}`};
+  if(d>3)   return {tier:'Exceeded',     color:C.blue,  pill:'bl', text:`▲ exceeded ${s}`};
   if(d>=-3) return {tier:'Met',          color:C.green, pill:'u',  text:`✓ met ${s}`};
   if(d>=-10)return {tier:'Approaching',  color:C.amber, pill:'am', text:`→ approaching ${s}`};
   return            {tier:'Did not meet', color:C.red,   pill:'d',  text:`▼ did not meet ${s}`};
