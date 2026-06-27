@@ -87,6 +87,7 @@
   .pill{font-size:10.5px;padding:2px 8px;border-radius:20px;font-weight:700;white-space:nowrap;}
   .pill.u{background:#e2f4ec;color:#0F6E56;} .pill.d{background:#faeae6;color:#9b3a1d;} .pill.f{background:#eef0f2;color:#7a828e;}
   .pill.am{background:#fcefd9;color:#8a5a06;}
+  .pill.bl{background:#e1ecf7;color:#155DA8;}
 
   .callout{border-radius:10px;padding:13px 15px;font-size:13px;margin-top:16px;line-height:1.5;}
   .callout.good{background:#e9f6f0;border:1px solid #c8ebdc;color:#0d5e49;}
@@ -735,7 +736,7 @@ const GOALS=[
 // "Met" on the scorecard counts exceeded + met (gap ≥ −3).
 function goalStatus(actual,goal){
   const d=actual-goal, s=(d>=0?'+':'')+d;
-  if(d>3)   return {tier:'Exceeded',     color:C.green, pill:'u',  text:`▲ exceeded ${s}`};
+  if(d>3)   return {tier:'Exceeded',     color:C.green, pill:'bl', text:`▲ exceeded ${s}`};
   if(d>=-3) return {tier:'Met',          color:C.green, pill:'u',  text:`✓ met ${s}`};
   if(d>=-10)return {tier:'Approaching',  color:C.amber, pill:'am', text:`→ approaching ${s}`};
   return            {tier:'Did not meet', color:C.red,   pill:'d',  text:`▼ did not meet ${s}`};
