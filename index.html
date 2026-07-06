@@ -130,10 +130,11 @@
     <div id="mono" class="mast-mono">CSH</div>
     <div class="mast-txt">
       <h1>2025–26 Results &amp; Outcomes</h1>
-      <p>Regents &middot; Course grades &middot; Student experience &middot; Postsecondary</p>
+      <p>Regents &middot; AP &middot; Course grades &middot; Student experience &middot; Postsecondary</p>
     </div>
     <div class="mast-badges">
       <span class="mb">June 2026 Regents</span>
+      <span class="mb">May 2026 AP</span>
       <span class="mb">Final grades ’25–26</span>
       <span class="mb">Internal review</span>
     </div>
@@ -144,6 +145,7 @@
   <div class="nav-inner">
     <button class="active" onclick="tab('overview',this)">Overview</button>
     <button onclick="tab('regents',this)">Regents Exams</button>
+    <button onclick="tab('ap',this)">AP Exams</button>
     <button onclick="tab('grades',this)">Grades by Department</button>
     <button onclick="tab('survey',this)">Student Experience</button>
     <button onclick="tab('staff',this)">Staff Experience</button>
@@ -160,7 +162,7 @@
   <p class="sec-sub">June 2026 Regents pass rates, year-end course-goal attainment, and the movement in student experience. Every figure is school-level and de-identified.</p>
 
   <div class="callout info">
-    <b>How to read this site.</b> The <b>Regents</b> tab breaks down each June 2026 exam — including how results stacked up against this year's exam goals — with score distributions, results by class, and comparisons to district, state, and peer schools. <b>Grades by Department</b> tracks the instructional priority of 90% of courses meeting their grade and pass-rate goals. <b>Student Experience</b> follows the full survey arc from Fall 2024 through June 2026, and <b>Postsecondary</b> shows where the Class of 2026 is headed after CSH. Additional exams and AP results can be added as they come in.
+    <b>How to read this site.</b> The <b>Regents</b> tab breaks down each June 2026 exam — including how results stacked up against this year's exam goals — with score distributions, results by class, and comparisons to district, state, and peer schools. <b>Grades by Department</b> tracks the instructional priority of 90% of courses meeting their grade and pass-rate goals. <b>AP Exams</b> covers the May 2026 College Board administration — score distributions and results against each course's AP Key Result. <b>Student Experience</b> follows the full survey arc from Fall 2024 through June 2026, and <b>Postsecondary</b> shows where the Class of 2026 is headed after CSH.
   </div>
 
   <div class="eyebrow" style="margin-top:6px">June 2026 Regents — pass rate (scale score ≥ 65)</div>
@@ -172,6 +174,14 @@
     <div class="card gr"><div class="lab">Biology</div><div class="val">77<small>%</small></div><div class="sub">69 of 90 · new Regents exam</div></div>
     <div class="card gr"><div class="lab">Physics</div><div class="val">97<small>%</small></div><div class="sub">34 of 35 · Honors cohort</div></div>
     <div class="card am"><div class="lab">Chemistry</div><div class="val">62<small>%</small></div><div class="sub">20 of 32 examinees</div></div>
+  </div>
+
+  <div class="eyebrow" style="margin-top:22px">May 2026 AP exams — score of 3 or higher</div>
+  <div class="cards">
+    <div class="card bl"><div class="lab">AP exams taken</div><div class="val">354</div><div class="sub">221 students · 9 subjects</div></div>
+    <div class="card bl"><div class="lab">Scored 3+</div><div class="val">47<small>%</small></div><div class="sub">165 of 354 exams</div></div>
+    <div class="card gr"><div class="lab">AP goals met</div><div class="val">4<small> / 9</small></div><div class="sub">exam pass-rate KRs</div></div>
+    <div class="card gr"><div class="lab">Standout</div><div class="val">83<small>%</small></div><div class="sub">AP Af-Am Studies 3+ vs 40% goal</div></div>
   </div>
 
   <div class="grid2" style="margin-top:22px">
@@ -447,6 +457,49 @@
   </div>
 </section>
 
+<!-- ============ AP EXAMS ============ -->
+<section id="ap" class="tab">
+  <div class="eyebrow">May 2026 administration</div>
+  <h2 class="sec">AP Exams</h2>
+  <p class="sec-sub">College Board Advanced Placement results across 9 subjects — 354 exams taken by 221 students in grades 10–12. AP scores run 1–5; a score of <b>3 or higher is "qualified"</b> and earns credit at many colleges. All figures are school-level and de-identified.</p>
+
+  <div class="subnav">
+    <button class="active" onclick="sub('ap','goals',this)">Goal scorecard</button>
+    <button onclick="sub('ap','dist',this)">Score distributions</button>
+  </div>
+
+  <!-- AP GOAL SCORECARD -->
+  <div id="ap-goals" class="sub active">
+    <div class="callout info" style="margin:14px 0 2px">May 2026 AP results measured against this year's per-course AP Key Results. <b>4 of 9 AP pass-rate goals were met.</b> Three courses blew past target — <b>African American Studies</b> (83% scoring 3+ vs a 40% goal), <b>English Language</b> (81% vs 50%), and <b>Calculus BC</b> (71% vs 35%) — and Calculus AB landed within 3 points of its goal. CS A missed its 65% pass goal but hit its average-score target (2.71 vs 2.7). The biggest gap is <b>Comparative Government</b> (12% vs 35%); CS Principles, English Literature, and Biology each finished 11–15 points short.</div>
+    <div class="cards" style="margin-top:14px">
+      <div class="card gr"><div class="lab">AP goals met</div><div class="val">4<small> / 9</small></div><div class="sub">exam pass-rate KRs</div></div>
+      <div class="card bl"><div class="lab">Biggest beat</div><div class="val">+43</div><div class="sub">Af-Am Studies: 83% vs 40% goal</div></div>
+      <div class="card rd"><div class="lab">Biggest gap</div><div class="val">−23</div><div class="sub">Comp Gov: 12% vs 35% goal</div></div>
+      <div class="card bl"><div class="lab">Scored 3+ overall</div><div class="val">47<small>%</small></div><div class="sub">165 of 354 exams</div></div>
+    </div>
+    <div class="panel">
+      <h4>Share scoring 3+ vs. AP goal — by course</h4>
+      <p class="cap">Goal (gray) vs. actual May 2026 share of examinees scoring 3 or higher. Blue = exceeded, green = met, amber = approaching, red = missed.</p>
+      <div class="chartbox" style="height:340px"><canvas id="apGoal"></canvas></div>
+    </div>
+    <div class="tbl-wrap">
+      <table><thead><tr><th>Exam</th><th>N</th><th>Goal — % 3+</th><th>Actual — % 3+</th><th>Goal avg</th><th>Actual avg</th><th>Result</th></tr></thead><tbody id="apGoalTable"></tbody></table>
+    </div>
+    <div class="note">AP Key Results from the 2025–26 Key Results by Course; each KR pairs a share-scoring-3+ goal with an average-score target. Actual average is green when the average target was met — note CS A hit its average target while missing the pass-rate goal. Result pills classify the pass-rate gap using the same tiers as the Regents scorecard. The Calculus BC AB subscore (6 of 7 students scored 3+) is not counted as a separate exam.</div>
+  </div>
+
+  <!-- AP DISTRIBUTIONS -->
+  <div id="ap-dist" class="sub">
+    <div class="panel" style="margin-top:14px">
+      <h4>All AP exams — score distribution</h4>
+      <p class="cap">354 exams across 9 subjects. 47% scored 3 or higher; overall average 2.50.</p>
+      <div class="chartbox" style="height:260px"><canvas id="apAllDist"></canvas></div>
+    </div>
+    <div class="grid2" style="margin-top:16px" id="apDistGrid"></div>
+    <div class="note">Count of students at each AP score (1–5); 3+ shown in blue/green. Cohort notes reflect the predominant grade level of examinees.</div>
+  </div>
+</section>
+
 <!-- ============ GRADES ============ -->
 <section id="grades" class="tab">
   <div class="eyebrow">Trimester 2, 2025–26</div>
@@ -684,13 +737,14 @@
   <div class="eyebrow">Sources &amp; references</div>
   <div class="refs">
     Regents (June 2026), computed from internal grading sheets (Algebra I, Algebra II, ELA, Global History, Biology, Physics, and Chemistry).<br>
+    AP exams: College Board AP School Organization Score Roster 2026 (May 2026 administration), aggregated from student-level score reports; goals from 2025–26 Key Results by Course (internal).<br>
     Course grades: Comp Sci High EOY ’25–26 Report (final grades) and 2025–26 Key Results by Course (internal).<br>
     Peer / state / district comparisons: State of CSH Data Review — End of Trimester One Edition (Dec 4, 2025)<br>
     Student experience: CSH Student Experience Surveys — Fall 2024, Fall 2025, Spring 2026 (internal)<br>
     Staff experience: CSH Organizational Feedback Surveys — June 2026 (61 respondents) and December 2025 (37 respondents), internal, with prior administrations back to December 2023<br>
     Postsecondary: PSL G12 Milestone Tracker 2025–26 (internal) — reported as de-identified counts; no student-level data is published
   </div>
-  <div class="disc">Regents pass rate = scale score ≥ 65. Algebra I cohort rate combines the January and June administrations (152 students); other figures reflect the June 2026 sitting. Comparison figures for district, state, and peer schools (District 12 / South Bronx, NY State, Bronx Center for Science and Math, Dream Charter) are reproduced from the State of CSH Data Review and reflect the most recent reported year, not necessarily June 2026. All data is school-level and de-identified. Staff survey results reflect 61 respondents in June 2026 and 37 in December 2025; open-ended staff responses are reviewed internally and are not part of this public summary. Postsecondary figures reflect June 2026 matriculation decisions for the 96 graduating seniors (99-senior cohort; 3 repeating senior year) and may shift over the summer; college rankings are US News &amp; World Report 2026 (National Universities and National Liberal Arts Colleges are separate lists). Built for internal review.</div>
+  <div class="disc">Regents pass rate = scale score ≥ 65. AP figures count each exam sitting (354 exams by 221 students); a score of 3+ is College Board "qualified" and is the pass measure in each AP Key Result; the Calculus BC AB subscore is not counted as a separate exam. Algebra I cohort rate combines the January and June administrations (152 students); other figures reflect the June 2026 sitting. Comparison figures for district, state, and peer schools (District 12 / South Bronx, NY State, Bronx Center for Science and Math, Dream Charter) are reproduced from the State of CSH Data Review and reflect the most recent reported year, not necessarily June 2026. All data is school-level and de-identified. Staff survey results reflect 61 respondents in June 2026 and 37 in December 2025; open-ended staff responses are reviewed internally and are not part of this public summary. Postsecondary figures reflect June 2026 matriculation decisions for the 96 graduating seniors (99-senior cohort; 3 repeating senior year) and may shift over the summer; college rankings are US News &amp; World Report 2026 (National Universities and National Liberal Arts Colleges are separate lists). Built for internal review.</div>
 </footer>
 
 </div>
@@ -741,6 +795,21 @@ function goalStatus(actual,goal){
   if(d>=-10)return {tier:'Approaching',  color:C.amber, pill:'am', text:`→ approaching ${s}`};
   return            {tier:'Did not meet', color:C.red,   pill:'d',  text:`▼ did not meet ${s}`};
 }
+// AP exams — label, n, dist by score (1–5), % scoring 3+, mean score, KR goal % 3+, KR goal avg, cohort note
+const AP={
+  total:{n:354,students:221,dist:[57,132,109,44,12]},
+  exams:[
+    ['AP African American Studies',24,[0,4,9,9,2],83,3.38,40,2.3,'mostly 12th grade'],
+    ['AP English Language',43,[1,7,20,13,2],81,3.19,50,2.5,'11th grade'],
+    ['AP Calculus BC',7,[0,2,2,1,2],71,3.43,35,2.3,'12th grade'],
+    ['AP Computer Science A',21,[6,4,4,4,3],52,2.71,65,2.7,'11th grade'],
+    ['AP CS Principles',82,[11,31,33,5,2],49,2.46,60,2.6,'mostly 10th grade'],
+    ['AP English Literature',47,[9,17,18,2,1],45,2.34,60,2.6,'mostly 12th grade'],
+    ['AP Biology',56,[3,34,15,4,0],34,2.36,45,2.4,'11th grade'],
+    ['AP Calculus AB',25,[1,16,3,5,0],32,2.48,35,2.3,'mostly 12th grade'],
+    ['AP Comparative Government',49,[26,17,5,1,0],12,1.61,35,2.3,'mostly 12th grade'],
+  ]
+};
 const GR={
   trend:{l:["T1 ’24-25","T2 ’24-25","T1 ’25-26","T2 ’25-26","Final ’25-26"], grade:[55,68,73,80,91], pass:[50,70,61,78,91]},
   dept:[ // name, gradeLast, gradeFinal, passLast, passFinal, gradeMet, passMet
@@ -890,6 +959,8 @@ function build(scope){
     distChart('chemdist',DATA.chem.dist);
     examGoal('chemgoal',DATA.chem);
   }
+  if(scope==='ap-goals'){ apGoalChart(); apGoalTable(); }
+  if(scope==='ap-dist'){ apDistChart('apAllDist',AP.total.dist); apDistGrid(); }
   if(scope==='grades'){
     new Chart(ov('grTrend'),{type:'line',data:{labels:GR.trend.l,datasets:[
       {label:'Met grade goal',data:GR.trend.grade,borderColor:C.blue,backgroundColor:C.blue,tension:.3,borderWidth:2.5,pointRadius:4},
@@ -961,6 +1032,42 @@ function goalTable(){
       <td>${pill}</td></tr>`;
   }).join('');
 }
+/* ---------- AP exams ---------- */
+function apDistChart(id,vals){
+  const cols=['#cdd5df','#cdd5df',C.blue2,C.blue,C.green];
+  new Chart(ov(id),{type:'bar',data:{labels:['1','2','3','4','5'],datasets:[{data:vals,backgroundColor:cols,borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>c.parsed.y+' students'}}},
+      scales:{y:{beginAtZero:true,grid:{color:C.line},ticks:{precision:0}},x:{grid:{display:false}}}}});
+}
+function apGoalChart(){
+  const d=AP.exams;
+  new Chart(ov('apGoal'),{type:'bar',data:{labels:d.map(x=>x[0]),datasets:[
+    {label:'Goal',data:d.map(x=>x[5]),backgroundColor:'#c5cedb',borderRadius:3},
+    {label:'Actual',data:d.map(x=>x[3]),backgroundColor:d.map(x=>goalStatus(x[3],x[5]).color),borderRadius:3}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:true,labels:{boxWidth:11,font:{size:11}}},
+        tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x+'% scoring 3+'}}},
+      scales:{x:pct(100),y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+}
+function apGoalTable(){
+  document.getElementById('apGoalTable').innerHTML=AP.exams.map(x=>{
+    const st=goalStatus(x[3],x[5]), avgOk=x[4]>=x[6];
+    return `<tr><td style="font-weight:600">${x[0]}</td><td class="num" style="color:#9aa3b0">${x[1]}</td>
+      <td class="num">${x[5]}%</td><td class="num">${x[3]}%</td>
+      <td class="num">${x[6].toFixed(1)}</td><td class="num" style="color:${avgOk?'#0F6E56':'#9b3a1d'}">${x[4].toFixed(2)}</td>
+      <td><span class="pill ${st.pill}">${st.text}</span></td></tr>`;
+  }).join('');
+}
+function apDistGrid(){
+  const wrap=ov('apDistGrid');
+  wrap.innerHTML=AP.exams.map((x,i)=>`<div class="panel" style="margin-top:0">
+    <h4>${x[0]}</h4>
+    <p class="cap">${x[1]} examinees · ${x[7]} · <b>${x[3]}%</b> scored 3+ · avg ${x[4].toFixed(2)}</p>
+    <div class="chartbox" style="height:200px"><canvas id="apd${i}"></canvas></div></div>`).join('');
+  AP.exams.forEach((x,i)=>apDistChart('apd'+i,x[2]));
+}
+
 function deptChart(id,labels,lastYr,cur,min,max,kind){
   new Chart(ov(id),{type:'bar',data:{labels,datasets:[
     {label:'’24–25',data:lastYr,backgroundColor:'#c5cedb',borderRadius:3},
