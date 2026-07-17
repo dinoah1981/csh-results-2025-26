@@ -466,6 +466,7 @@
   <div class="subnav">
     <button class="active" onclick="sub('ap','goals',this)">Goal scorecard</button>
     <button onclick="sub('ap','dist',this)">Score distributions</button>
+    <button onclick="sub('ap','cmp',this)">Peer comparison</button>
   </div>
 
   <!-- AP GOAL SCORECARD -->
@@ -497,6 +498,13 @@
     </div>
     <div class="grid2" style="margin-top:16px" id="apDistGrid"></div>
     <div class="note">Count of students at each AP score (1–5); 3+ shown in blue/green. Cohort notes reflect the predominant grade level of examinees.</div>
+  </div>
+
+  <!-- AP PEER COMPARISON -->
+  <div id="ap-cmp" class="sub">
+    <div class="callout info" style="margin:14px 0 2px">Peer figures come from the <b>CSGF HS Data Collaborative</b> — charter high schools nationwide that share College Board results — for the <b>2024–25 administration</b>, the latest shared year, alongside the College Board national average. CSH's own 2024–25 result is shown so the peer comparison is same-year; May 2026 is our current result. In <b>AP Biology</b>, CSH scores well above the charter-peer average (both years) while still trailing the national average — the national pool skews toward schools that gate AP enrollment. Comparative data is published for AP Biology so far; more subjects will be added as collaborative exports are pulled.</div>
+    <div class="grid2" style="margin-top:14px" id="apCmpGrid"></div>
+    <div class="note">Collaborative figures are student-weighted across all reporting schools (CSH included). AP scores run 1–5; "3+" is the College Board qualified benchmark.</div>
   </div>
 </section>
 
@@ -740,6 +748,7 @@
     AP exams: College Board AP School Organization Score Roster 2026 (May 2026 administration), aggregated from student-level score reports; goals from 2025–26 Key Results by Course (internal).<br>
     Course grades: Comp Sci High EOY ’25–26 Report (final grades) and 2025–26 Key Results by Course (internal).<br>
     Peer / state / district comparisons: State of CSH Data Review — End of Trimester One Edition (Dec 4, 2025)<br>
+    AP peer comparison: CSGF HS Data Collaborative school-level AP results (2024–25 administration) and College Board national averages<br>
     Student experience: CSH Student Experience Surveys — Fall 2024, Fall 2025, Spring 2026 (internal)<br>
     Staff experience: CSH Organizational Feedback Surveys — June 2026 (61 respondents) and December 2025 (37 respondents), internal, with prior administrations back to December 2023<br>
     Postsecondary: PSL G12 Milestone Tracker 2025–26 (internal) — reported as de-identified counts; no student-level data is published
@@ -808,7 +817,14 @@ const AP={
     ['AP Biology',56,[3,34,15,4,0],34,2.36,45,2.4,'11th grade'],
     ['AP Calculus AB',25,[1,16,3,5,0],32,2.48,35,2.3,'mostly 12th grade'],
     ['AP Comparative Government',49,[26,17,5,1,0],12,1.61,35,2.3,'mostly 12th grade'],
-  ]
+  ],
+  // CSGF HS Data Collaborative peer data (2024–25 administration, latest shared year),
+  // keyed by the exam label used in exams[] above. avg/pass are student-weighted across
+  // all reporting schools (CSH included); natAvg/natPass are College Board national;
+  // cshPrevAvg/cshPrevPass are CSH's own 2024–25 result from the same export.
+  cmp:{
+    'AP Biology':{schools:136,n:5761,avg:1.92,pass:25,natAvg:3.24,natPass:70,cshPrevAvg:2.50,cshPrevPass:46},
+  }
 };
 const GR={
   trend:{l:["T1 ’24-25","T2 ’24-25","T1 ’25-26","T2 ’25-26","Final ’25-26"], grade:[55,68,73,80,91], pass:[50,70,61,78,91]},
@@ -961,6 +977,7 @@ function build(scope){
   }
   if(scope==='ap-goals'){ apGoalChart(); apGoalTable(); }
   if(scope==='ap-dist'){ apDistChart('apAllDist',AP.total.dist); apDistGrid(); }
+  if(scope==='ap-cmp'){ apCmpGrid(); }
   if(scope==='grades'){
     new Chart(ov('grTrend'),{type:'line',data:{labels:GR.trend.l,datasets:[
       {label:'Met grade goal',data:GR.trend.grade,borderColor:C.blue,backgroundColor:C.blue,tension:.3,borderWidth:2.5,pointRadius:4},
@@ -1058,6 +1075,34 @@ function apGoalTable(){
       <td class="num">${x[6].toFixed(1)}</td><td class="num" style="color:${avgOk?'#0F6E56':'#9b3a1d'}">${x[4].toFixed(2)}</td>
       <td><span class="pill ${st.pill}">${st.text}</span></td></tr>`;
   }).join('');
+}
+function apCmpChart(id,rows,isPct){
+  new Chart(ov(id),{type:'bar',data:{labels:rows.map(r=>r[0]),datasets:[{data:rows.map(r=>r[1]),
+    backgroundColor:rows.map(r=>r[2]),borderRadius:4}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>isPct?c.parsed.x+'% scoring 3+':'avg score '+c.parsed.x.toFixed(2)}}},
+      scales:{x:isPct?pct(100):{min:0,max:5,grid:{color:C.line}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+}
+function apCmpGrid(){
+  const entries=Object.entries(AP.cmp);
+  ov('apCmpGrid').innerHTML=entries.map(([label,c],i)=>{
+    const cur=AP.exams.find(x=>x[0]===label);
+    return `<div class="panel" style="margin-top:0">
+      <h4>${label} — average score</h4>
+      <p class="cap">CSGF collaborative: ${c.schools} schools · ${c.n.toLocaleString()} examinees (’24–25). CSH May ’26: ${cur[1]} examinees.</p>
+      <div class="chartbox" style="height:210px"><canvas id="apcAvg${i}"></canvas></div></div>
+    <div class="panel" style="margin-top:0">
+      <h4>${label} — share scoring 3+</h4>
+      <p class="cap">Share of examinees at 3 or higher, the college-credit benchmark.</p>
+      <div class="chartbox" style="height:210px"><canvas id="apcPass${i}"></canvas></div></div>`;
+  }).join('');
+  entries.forEach(([label,c],i)=>{
+    const cur=AP.exams.find(x=>x[0]===label);
+    const rows=v=>[['CSH ’25–26',v[0],C.green],['CSH ’24–25',v[1],C.blue2],
+                   ['CSGF collab ’24–25',v[2],'#b7c2d2'],['National ’24–25',v[3],'#8d99ab']];
+    apCmpChart('apcAvg'+i,rows([cur[4],c.cshPrevAvg,c.avg,c.natAvg]),false);
+    apCmpChart('apcPass'+i,rows([cur[3],c.cshPrevPass,c.pass,c.natPass]),true);
+  });
 }
 function apDistGrid(){
   const wrap=ov('apDistGrid');
