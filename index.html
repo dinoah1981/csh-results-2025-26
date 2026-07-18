@@ -502,7 +502,7 @@
 
   <!-- AP PEER COMPARISON -->
   <div id="ap-cmp" class="sub">
-    <div class="callout info" style="margin:14px 0 2px">Peer figures come from the <b>CSGF HS Data Collaborative</b> — charter high schools nationwide that share College Board results — for the <b>2024–25 administration</b>, the latest shared year, alongside the College Board national average. CSH's own 2024–25 result is shown so the peer comparison is same-year; May 2026 is our current result. In <b>AP Biology</b>, CSH scores well above the charter-peer average (both years) while still trailing the national average — the national pool skews toward schools that gate AP enrollment. Comparative data is published for AP Biology so far; more subjects will be added as collaborative exports are pulled.</div>
+    <div class="callout info" style="margin:14px 0 2px">Peer figures come from the <b>CSGF HS Data Collaborative</b> — charter high schools nationwide that share College Board results — for the <b>2024–25 administration</b>, the latest shared year, alongside the College Board national average. CSH's own 2024–25 result is shown where available so the peer comparison is same-year (African American Studies was new at CSH in ’25–26; the ’24–25 Calculus BC cohort was under the collaborative's 10-student reporting threshold). <b>CSH outperforms the charter-peer average in 8 of 9 subjects</b> — and in <b>African American Studies</b> and <b>English Language</b> the share scoring 3+ beats even the <i>national</i> average, a pool that skews toward schools that gate AP enrollment. The exception is Comparative Government, which trails a very small (4-school) peer group.</div>
     <div class="grid2" style="margin-top:14px" id="apCmpGrid"></div>
     <div class="note">Collaborative figures are student-weighted across all reporting schools (CSH included). AP scores run 1–5; "3+" is the College Board qualified benchmark.</div>
   </div>
@@ -821,9 +821,19 @@ const AP={
   // CSGF HS Data Collaborative peer data (2024–25 administration, latest shared year),
   // keyed by the exam label used in exams[] above. avg/pass are student-weighted across
   // all reporting schools (CSH included); natAvg/natPass are College Board national;
-  // cshPrevAvg/cshPrevPass are CSH's own 2024–25 result from the same export.
+  // cshPrevAvg/cshPrevPass are CSH's own 2024–25 result from the same export — absent
+  // when the course was new in ’25–26 (Af-Am Studies) or the prior cohort was under
+  // the collaborative's 10-student reporting threshold (Calculus BC).
   cmp:{
+    'AP African American Studies':{schools:25,n:676,avg:3.07,pass:70,natAvg:3.41,natPass:79},
+    'AP English Language':{schools:195,n:11383,avg:2.03,pass:33,natAvg:3.19,natPass:74,cshPrevAvg:2.67,cshPrevPass:60},
+    'AP Calculus BC':{schools:25,n:467,avg:2.53,pass:44,natAvg:3.82,natPass:79},
+    'AP Computer Science A':{schools:49,n:1683,avg:1.45,pass:14,natAvg:3.18,natPass:67,cshPrevAvg:3.15,cshPrevPass:75},
+    'AP CS Principles':{schools:122,n:5431,avg:1.65,pass:19,natAvg:2.87,natPass:62,cshPrevAvg:2.50,cshPrevPass:53},
+    'AP English Literature':{schools:185,n:9212,avg:2.02,pass:32,natAvg:3.24,natPass:74,cshPrevAvg:2.48,cshPrevPass:52},
     'AP Biology':{schools:136,n:5761,avg:1.92,pass:25,natAvg:3.24,natPass:70,cshPrevAvg:2.50,cshPrevPass:46},
+    'AP Calculus AB':{schools:157,n:4135,avg:1.84,pass:21,natAvg:3.21,natPass:64,cshPrevAvg:2.44,cshPrevPass:40},
+    'AP Comparative Government':{schools:4,n:105,avg:2.13,pass:36,natAvg:3.16,natPass:72,cshPrevAvg:2.60,cshPrevPass:48},
   }
 };
 const GR={
@@ -1084,22 +1094,26 @@ function apCmpChart(id,rows,isPct){
       scales:{x:isPct?pct(100):{min:0,max:5,grid:{color:C.line}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
 }
 function apCmpGrid(){
-  const entries=Object.entries(AP.cmp);
-  ov('apCmpGrid').innerHTML=entries.map(([label,c],i)=>{
-    const cur=AP.exams.find(x=>x[0]===label);
+  const entries=AP.exams.filter(x=>AP.cmp[x[0]]).map(x=>[x,AP.cmp[x[0]]]);
+  ov('apCmpGrid').innerHTML=entries.map(([cur,c],i)=>{
+    const small=c.schools<10?' <b>(small peer group)</b>':'';
+    const noPrev=c.cshPrevAvg==null?' No shared CSH ’24–25 result.':'';
     return `<div class="panel" style="margin-top:0">
-      <h4>${label} — average score</h4>
-      <p class="cap">CSGF collaborative: ${c.schools} schools · ${c.n.toLocaleString()} examinees (’24–25). CSH May ’26: ${cur[1]} examinees.</p>
+      <h4>${cur[0]} — average score</h4>
+      <p class="cap">CSGF collaborative: ${c.schools} schools · ${c.n.toLocaleString()} examinees (’24–25)${small}. CSH May ’26: ${cur[1]} examinees.${noPrev}</p>
       <div class="chartbox" style="height:210px"><canvas id="apcAvg${i}"></canvas></div></div>
     <div class="panel" style="margin-top:0">
-      <h4>${label} — share scoring 3+</h4>
+      <h4>${cur[0]} — share scoring 3+</h4>
       <p class="cap">Share of examinees at 3 or higher, the college-credit benchmark.</p>
       <div class="chartbox" style="height:210px"><canvas id="apcPass${i}"></canvas></div></div>`;
   }).join('');
-  entries.forEach(([label,c],i)=>{
-    const cur=AP.exams.find(x=>x[0]===label);
-    const rows=v=>[['CSH ’25–26',v[0],C.green],['CSH ’24–25',v[1],C.blue2],
-                   ['CSGF collab ’24–25',v[2],'#b7c2d2'],['National ’24–25',v[3],'#8d99ab']];
+  entries.forEach(([cur,c],i)=>{
+    const rows=v=>{
+      const r=[['CSH ’25–26',v[0],C.green]];
+      if(v[1]!=null)r.push(['CSH ’24–25',v[1],C.blue2]);
+      r.push(['CSGF collab ’24–25',v[2],'#b7c2d2'],['National ’24–25',v[3],'#8d99ab']);
+      return r;
+    };
     apCmpChart('apcAvg'+i,rows([cur[4],c.cshPrevAvg,c.avg,c.natAvg]),false);
     apCmpChart('apcPass'+i,rows([cur[3],c.cshPrevPass,c.pass,c.natPass]),true);
   });
