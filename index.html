@@ -405,7 +405,12 @@
         <div class="chartbox" style="height:270px"><canvas id="biogoal"></canvas></div>
       </div>
     </div>
-    <div class="note">First administration of the redesigned NYS Life Science: Biology Regents. Figures computed from internal grading sheets (unofficial scaled scores); no district, state, or peer comparison is published for the new exam's first year.</div>
+    <div class="panel" style="margin-top:16px">
+      <h4>CSH vs. district, state &amp; peer schools</h4>
+      <p class="cap">Biology Regents pass rate. CSH shows June 2026 on the new Life Science exam; district, state, peer, and CSH-best figures are the most recent reported on the prior Biology exam (State of CSH Data Review).</p>
+      <div class="chartbox" style="height:250px"><canvas id="biopeer"></canvas></div>
+    </div>
+    <div class="note">First administration of the redesigned NYS Life Science: Biology Regents. Figures computed from internal grading sheets (unofficial scaled scores). District, state, and peer comparisons reflect the most recent reported results on the prior exam — no comparison is published yet for the new exam's first year.</div>
   </div>
 
   <!-- PHYSICS -->
@@ -429,7 +434,12 @@
         <div class="chartbox" style="height:270px"><canvas id="physgoal"></canvas></div>
       </div>
     </div>
-    <div class="note">Honors Physics Regents cohort. Figures computed from the internal grading sheet using each student's Regents scale score (before grade bumps); no district, state, or peer comparison is published here.</div>
+    <div class="panel" style="margin-top:16px">
+      <h4>CSH vs. district, state &amp; peer schools</h4>
+      <p class="cap">Physics Regents pass rate. CSH shows June 2026 — a new best, up from 90% in ’25; district, state, and peer figures are the most recent reported (State of CSH Data Review).</p>
+      <div class="chartbox" style="height:250px"><canvas id="physpeer"></canvas></div>
+    </div>
+    <div class="note">Honors Physics Regents cohort. Figures computed from the internal grading sheet using each student's Regents scale score (before grade bumps). District, state, and peer comparisons reflect the most recent reported results (State of CSH Data Review).</div>
   </div>
 
   <!-- CHEMISTRY -->
@@ -453,7 +463,12 @@
         <div class="chartbox" style="height:270px"><canvas id="chemgoal"></canvas></div>
       </div>
     </div>
-    <div class="note">Chemistry Regents cohort. Figures computed from the internal grading sheet (scaled scores). Measured against the Honors Chemistry exam Key Result (80% proficient); there is no separate Regents pass-rate KR for regular Chemistry. No district, state, or peer comparison is published here.</div>
+    <div class="panel" style="margin-top:16px">
+      <h4>CSH vs. district, state &amp; peer schools</h4>
+      <p class="cap">Chemistry Regents pass rate. CSH shows June 2026; district, state, and peer figures are the most recent reported (State of CSH Data Review). Chemistry remains a growth area — behind the state and Bronx Center, and below the CSH best of 78% (2023), though well ahead of the district.</p>
+      <div class="chartbox" style="height:250px"><canvas id="chempeer"></canvas></div>
+    </div>
+    <div class="note">Chemistry Regents cohort. Figures computed from the internal grading sheet (scaled scores). Measured against the Honors Chemistry exam Key Result (80% proficient); there is no separate Regents pass-rate KR for regular Chemistry. District, state, and peer comparisons reflect the most recent reported results (State of CSH Data Review).</div>
   </div>
 </section>
 
@@ -777,9 +792,12 @@ const DATA={
       peer:{l:['S. Bronx Dist.','Dream','NY State','Bronx Center','Comp Sci High','CSH best (’26)'],v:[58,72,75,83,95,95]}},
   gl:{cls:{l:['Grade 10','Grade 11','Overall'],v:[74,91,80]},
       peer:{l:['S. Bronx Dist.','NY State','Dream','Comp Sci High','Bronx Center','CSH best (’24)'],v:[63,76,77,80,81,88]}},
-  bio:{dist:[15,6,41,25,3], goal:78, actual:77, pass:69, n:90},
-  phys:{dist:[0,1,5,22,7], goal:85, actual:97, pass:34, n:35},
-  chem:{dist:[3,9,11,8,1], goal:80, actual:62, pass:20, n:32}
+  bio:{dist:[15,6,41,25,3], goal:78, actual:77, pass:69, n:90,
+       peer:{l:['S. Bronx Dist.','NY State','Bronx Center','Dream','Comp Sci High','CSH best (’25)'],v:[41,58,59,61,77,88]}},
+  phys:{dist:[0,1,5,22,7], goal:85, actual:97, pass:34, n:35,
+       peer:{l:['S. Bronx Dist.','Bronx Center','NY State','CSH best (’25)','Comp Sci High'],v:[14,53,69,90,97]}},
+  chem:{dist:[3,9,11,8,1], goal:80, actual:62, pass:20, n:32,
+       peer:{l:['S. Bronx Dist.','Comp Sci High','NY State','CSH best (’23)','Bronx Center'],v:[25,62,65,78,90]}}
 };
 // course, exam-goal %, actual June 2026 pass %
 const GOALS=[
@@ -976,14 +994,17 @@ function build(scope){
   if(scope==='r-bio'){
     distChart('biodist',DATA.bio.dist);
     bioGoalChart();
+    hbarPass('biopeer',DATA.bio.peer.l,DATA.bio.peer.v,true);
   }
   if(scope==='r-phys'){
     distChart('physdist',DATA.phys.dist);
     examGoal('physgoal',DATA.phys);
+    hbarPass('physpeer',DATA.phys.peer.l,DATA.phys.peer.v,true);
   }
   if(scope==='r-chem'){
     distChart('chemdist',DATA.chem.dist);
     examGoal('chemgoal',DATA.chem);
+    hbarPass('chempeer',DATA.chem.peer.l,DATA.chem.peer.v,true);
   }
   if(scope==='ap-goals'){ apGoalChart(); apGoalTable(); }
   if(scope==='ap-dist'){ apDistChart('apAllDist',AP.total.dist); apDistGrid(); }
