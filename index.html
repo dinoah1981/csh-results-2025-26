@@ -308,6 +308,11 @@
       <p class="cap">Algebra I pass rate. CSH = 2026 (full Jan+June cohort); comparisons per State of CSH Data Review.</p>
       <div class="chartbox" style="height:230px"><canvas id="a1peer"></canvas></div>
     </div>
+    <div class="panel">
+      <h4>Average scale score vs. NYC — June 2026</h4>
+      <p class="cap">Same June 2026 administration, CSH vs. all NYC test-takers (NYC DOE Item Skills Analysis) — the only same-year comparison available until state results publish. CSH edges the city by a point.</p>
+      <div class="chartbox" style="height:110px"><canvas id="a1city"></canvas></div>
+    </div>
   </div>
 
   <!-- ALGEBRA II -->
@@ -336,6 +341,11 @@
       <p class="cap">Algebra II pass rate. CSH = June 2026 actual; comparisons per State of CSH Data Review.</p>
       <div class="chartbox" style="height:230px"><canvas id="a2peer"></canvas></div>
     </div>
+    <div class="panel">
+      <h4>Average scale score vs. NYC — June 2026</h4>
+      <p class="cap">Same June 2026 administration, CSH vs. all NYC test-takers (NYC DOE Item Skills Analysis). CSH +2.7 over the citywide average.</p>
+      <div class="chartbox" style="height:110px"><canvas id="a2city"></canvas></div>
+    </div>
   </div>
 
   <!-- ELA -->
@@ -359,6 +369,11 @@
         <div class="chartbox" style="height:270px"><canvas id="elapeer"></canvas></div>
       </div>
     </div>
+    <div class="panel" style="margin-top:16px">
+      <h4>Average scale score vs. NYC — June 2026</h4>
+      <p class="cap">Same June 2026 administration, CSH vs. all NYC test-takers (NYC DOE Item Skills Analysis). CSH runs <b>11.8 points above</b> the citywide average — the widest gap of any core exam.</p>
+      <div class="chartbox" style="height:110px"><canvas id="elacity"></canvas></div>
+    </div>
   </div>
 
   <!-- GLOBAL -->
@@ -381,6 +396,11 @@
         <p class="cap">Global History pass rate. CSH = June 2026 overall; comparisons per State of CSH Data Review.</p>
         <div class="chartbox" style="height:270px"><canvas id="glpeer"></canvas></div>
       </div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <h4>Average scale score vs. NYC — June 2026</h4>
+      <p class="cap">Same June 2026 administration, CSH vs. all NYC test-takers (NYC DOE Item Skills Analysis). CSH +1.9 over the citywide average.</p>
+      <div class="chartbox" style="height:110px"><canvas id="glcity"></canvas></div>
     </div>
   </div>
 
@@ -409,6 +429,11 @@
       <h4>CSH vs. district, state &amp; peer schools</h4>
       <p class="cap">Biology Regents pass rate. CSH shows June 2026 on the new Life Science exam; district, state, peer, and CSH-best figures are the most recent reported on the prior Biology exam (State of CSH Data Review).</p>
       <div class="chartbox" style="height:250px"><canvas id="biopeer"></canvas></div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <h4>Average scale score vs. NYC — June 2026</h4>
+      <p class="cap">Same June 2026 administration of the new Life Science exam, CSH vs. all NYC test-takers (NYC DOE Item Skills Analysis) — the one true same-year, same-exam comparison. CSH trails the citywide average by <b>3.2 points</b> in year one; a focus area alongside mastery.</p>
+      <div class="chartbox" style="height:110px"><canvas id="biocity"></canvas></div>
     </div>
     <div class="note">First administration of the redesigned NYS Life Science: Biology Regents. Figures computed from internal grading sheets (unofficial scaled scores). District, state, and peer comparisons reflect the most recent reported results on the prior exam — no comparison is published yet for the new exam's first year.</div>
   </div>
@@ -439,6 +464,11 @@
       <p class="cap">Physics Regents pass rate. CSH shows June 2026 — a new best, up from 90% in ’25; district, state, and peer figures are the most recent reported (State of CSH Data Review).</p>
       <div class="chartbox" style="height:250px"><canvas id="physpeer"></canvas></div>
     </div>
+    <div class="panel" style="margin-top:16px">
+      <h4>Average scale score vs. NYC — June 2026</h4>
+      <p class="cap">Same June 2026 administration, CSH vs. all NYC test-takers (NYC DOE Item Skills Analysis). CSH runs <b>27.8 points above</b> the citywide average — the largest gap on any exam.</p>
+      <div class="chartbox" style="height:110px"><canvas id="physcity"></canvas></div>
+    </div>
     <div class="note">Honors Physics Regents cohort. Figures computed from the internal grading sheet using each student's Regents scale score (before grade bumps). District, state, and peer comparisons reflect the most recent reported results (State of CSH Data Review).</div>
   </div>
 
@@ -467,6 +497,11 @@
       <h4>CSH vs. district, state &amp; peer schools</h4>
       <p class="cap">Chemistry Regents pass rate. CSH shows June 2026; district, state, and peer figures are the most recent reported (State of CSH Data Review). Chemistry remains a growth area — behind the state and Bronx Center, and below the CSH best of 78% (2023), though well ahead of the district.</p>
       <div class="chartbox" style="height:250px"><canvas id="chempeer"></canvas></div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <h4>Average scale score vs. NYC — June 2026</h4>
+      <p class="cap">Same June 2026 administration, CSH vs. all NYC test-takers (NYC DOE Item Skills Analysis). Even short of its Honors goal, CSH sits <b>9.1 points above</b> the citywide average.</p>
+      <div class="chartbox" style="height:110px"><canvas id="chemcity"></canvas></div>
     </div>
     <div class="note">Chemistry Regents cohort. Figures computed from the internal grading sheet (scaled scores). Measured against the Honors Chemistry exam Key Result (80% proficient); there is no separate Regents pass-rate KR for regular Chemistry. District, state, and peer comparisons reflect the most recent reported results (State of CSH Data Review).</div>
   </div>
@@ -785,20 +820,30 @@ Chart.defaults.color=C.mut;
 const bandLabels=['<55','55–64','65–74','75–84','85–100'];
 const DATA={
   a1:{dist:[17,35,51,18,8], cls:{l:['P1 Reg','P2 Retake','P4 Reg','P5 Reg','P6 Honors'],v:[64,47,21,60,93]},
-      peer:{l:['District 12','Dream','Bronx Center','NY State','Comp Sci High','CSH best (’19)'],v:[38,50,51,56,65,89]}},
+      peer:{l:['District 12','Dream','Bronx Center','NY State','Comp Sci High','CSH best (’19)'],v:[38,50,51,56,65,89]},
+      city:{s:65.9,c:64.9}},
   a2:{dist:[0,10,36,22,3], cls:{l:['Period 2','Period 4','Period 5'],v:[68,97,87]},
-      peer:{l:['S. Bronx Dist.','Bronx Center','NY State','Comp Sci High','CSH best (’24)'],v:[42,60,75,86,97]}},
+      peer:{l:['S. Bronx Dist.','Bronx Center','NY State','Comp Sci High','CSH best (’24)'],v:[42,60,75,86,97]},
+      city:{s:72.2,c:69.5}},
   ela:{dist:[1,4,14,40,46],
-      peer:{l:['S. Bronx Dist.','Dream','NY State','Bronx Center','Comp Sci High','CSH best (’26)'],v:[58,72,75,83,95,95]}},
+      peer:{l:['S. Bronx Dist.','Dream','NY State','Bronx Center','Comp Sci High','CSH best (’26)'],v:[58,72,75,83,95,95]},
+      city:{s:82.2,c:70.4}},
   gl:{cls:{l:['Grade 10','Grade 11','Overall'],v:[74,91,80]},
-      peer:{l:['S. Bronx Dist.','NY State','Dream','Comp Sci High','Bronx Center','CSH best (’24)'],v:[63,76,77,80,81,88]}},
+      peer:{l:['S. Bronx Dist.','NY State','Dream','Comp Sci High','Bronx Center','CSH best (’24)'],v:[63,76,77,80,81,88]},
+      city:{s:73.1,c:71.2}},
   bio:{dist:[15,6,41,25,3], goal:78, actual:77, pass:69, n:90,
-       peer:{l:['S. Bronx Dist.','NY State','Bronx Center','Dream','Comp Sci High','CSH best (’25)'],v:[41,58,59,61,77,88]}},
+       peer:{l:['S. Bronx Dist.','NY State','Bronx Center','Dream','Comp Sci High','CSH best (’25)'],v:[41,58,59,61,77,88]},
+       city:{s:67.7,c:70.9}},
   phys:{dist:[0,1,5,22,7], goal:85, actual:97, pass:34, n:35,
-       peer:{l:['S. Bronx Dist.','Bronx Center','NY State','CSH best (’25)','Comp Sci High'],v:[14,53,69,90,97]}},
+       peer:{l:['S. Bronx Dist.','Bronx Center','NY State','CSH best (’25)','Comp Sci High'],v:[14,53,69,90,97]},
+       city:{s:78.0,c:50.2}},
   chem:{dist:[3,9,11,8,1], goal:80, actual:62, pass:20, n:32,
-       peer:{l:['S. Bronx Dist.','Comp Sci High','NY State','CSH best (’23)','Bronx Center'],v:[25,62,65,78,90]}}
+       peer:{l:['S. Bronx Dist.','Comp Sci High','NY State','CSH best (’23)','Bronx Center'],v:[25,62,65,78,90]},
+       city:{s:67.3,c:58.2}}
 };
+// June 2026 average scale scores, CSH vs. all NYC test-takers, from the NYC
+// DOE Item Skills Analysis (84X597_JUN_REG_ISA_2026) — the only same-year
+// comparison available until state results publish.
 // course, exam-goal %, actual June 2026 pass %
 const GOALS=[
   ['Algebra I — Regular',75,50],
@@ -941,6 +986,15 @@ function hbarPass(id,labels,vals,highlightLast){
       scales:{x:pct(100),y:{grid:{display:false},ticks:{font:{size:11}}}}}});
   }
 }
+// Two-bar average-scale-score comparison: CSH vs. NYC citywide (same June
+// administration). Scores, not percents — no % suffix.
+function avgCmp(id,school,city){
+  new Chart(document.getElementById(id),{type:'bar',data:{labels:['Comp Sci High','NYC citywide'],datasets:[{data:[school,city],
+    backgroundColor:[C.blue,'#b7c2d2'],borderRadius:4}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>'avg scale score '+c.parsed.x}}},
+    scales:{x:{min:0,max:100,grid:{color:C.line}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+}
 function showDelta(items){
   if(!items.length)return'';const ch=items[0].chart,i=items[0].dataIndex;
   const f=ch.data.datasets[0]?.data[i], s=ch.data.datasets[1]?.data[i];
@@ -977,34 +1031,41 @@ function build(scope){
     distChart('a1dist',DATA.a1.dist);
     classChart('a1class',DATA.a1.cls.l,DATA.a1.cls.v);
     hbarPass('a1peer',DATA.a1.peer.l,DATA.a1.peer.v,true);
+    avgCmp('a1city',DATA.a1.city.s,DATA.a1.city.c);
   }
   if(scope==='r-alg2'){
     distChart('a2dist',DATA.a2.dist);
     classChart('a2class',DATA.a2.cls.l,DATA.a2.cls.v);
     hbarPass('a2peer',DATA.a2.peer.l,DATA.a2.peer.v,true);
+    avgCmp('a2city',DATA.a2.city.s,DATA.a2.city.c);
   }
   if(scope==='r-ela'){
     distChart('eladist',DATA.ela.dist);
     hbarPass('elapeer',DATA.ela.peer.l,DATA.ela.peer.v,true);
+    avgCmp('elacity',DATA.ela.city.s,DATA.ela.city.c);
   }
   if(scope==='r-global'){
     classChart('glclass',DATA.gl.cls.l,DATA.gl.cls.v);
     hbarPass('glpeer',DATA.gl.peer.l,DATA.gl.peer.v,true);
+    avgCmp('glcity',DATA.gl.city.s,DATA.gl.city.c);
   }
   if(scope==='r-bio'){
     distChart('biodist',DATA.bio.dist);
     bioGoalChart();
     hbarPass('biopeer',DATA.bio.peer.l,DATA.bio.peer.v,true);
+    avgCmp('biocity',DATA.bio.city.s,DATA.bio.city.c);
   }
   if(scope==='r-phys'){
     distChart('physdist',DATA.phys.dist);
     examGoal('physgoal',DATA.phys);
     hbarPass('physpeer',DATA.phys.peer.l,DATA.phys.peer.v,true);
+    avgCmp('physcity',DATA.phys.city.s,DATA.phys.city.c);
   }
   if(scope==='r-chem'){
     distChart('chemdist',DATA.chem.dist);
     examGoal('chemgoal',DATA.chem);
     hbarPass('chempeer',DATA.chem.peer.l,DATA.chem.peer.v,true);
+    avgCmp('chemcity',DATA.chem.city.s,DATA.chem.city.c);
   }
   if(scope==='ap-goals'){ apGoalChart(); apGoalTable(); }
   if(scope==='ap-dist'){ apDistChart('apAllDist',AP.total.dist); apDistGrid(); }
